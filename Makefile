@@ -17,7 +17,7 @@ chapters:
 	@$(MAKE) -s clean
 
 # 生成章节 PDF 并部署到 GitHub Pages 分支
-deploy: chapters
+deploy:
 	@mkdocs gh-deploy --force --remote-branch gh-deploy
 
 # 清理生成的文件
