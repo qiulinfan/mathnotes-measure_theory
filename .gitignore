@@ -19,4 +19,6 @@ build/
 # !main.pdf
 
 
-.DS_Storesite/
+.DS_Store
+
+site/
