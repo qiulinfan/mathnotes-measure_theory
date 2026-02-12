@@ -1,0 +1,238 @@
+\chapter{differentiation of regular Borel measures on $\mathbb{R}^n$ [Fol 3.4, finished]}
+
+\begin{definition}{regular Borel measure}
+    一个 Borel measure $\nu$ on $\mathbb{R}^n$ 被称为 regular 的, if $\nu$ is locally finite (finite on every compact set).
+\end{definition}
+
+
+\begin{theorem}{ regular Borel measure: 蕴含了 regularity}
+一个 regular Borel measure $\nu$ on $\mathbb{R}^n$ 一定满足:
+\begin{enumerate}
+    \item outer regularity: $$\nu (E) = \inf \{ \nu(U) \mid  E \subset U  \text{ open}    \}$$
+    \item inner regularity: $$\nu (E) = \inf \{ \nu(U) \mid  E \subset U  \text{ open}    \}$$
+\end{enumerate}    
+\end{theorem}
+\begin{remark}
+    这里不证明这两个性质. 因为目前的知识不够.\\
+     regular $\implies$ outer regularity: Hard, 其推导需要 Ch7 
+regular 和 inner regularity $\implies$ outer regularity: 这个简单, same as proof of Thm 1.18 on Folland.
+\end{remark}
+
+
+\begin{example}
+ 任何 LS measure on $\mathbb{R}$  (restrict to Borel sets) 都是 regular measure.
+    Lebesgue measure $m$ on $\mathbb{R}^n$ (restrict to Borel sets)  是 regular measure.
+\end{example}
+
+
+当然, 这个概念也可以推广至 signed/coplex measure 上.
+\begin{definition}{regular signed/complex measure}
+    一个 signed/complex measure $\nu$ on $\mathbb{R}^n$ 被称为 regular measure, if $|\nu|$ is regular 的.
+\end{definition}
+
+
+
+
+\begin{lemma}
+    如果 $f\in L^1_{loc} (\mathbb{R}^n)$, 则 $f\, dm$ 是一个 regular measure.
+    如果 $f:\mathbb{R}^n \to \mathbb{R}$ 是 extended-integrable 的, 则 \[
+    f \in L^1_{loc} (m) \iff f\, dm \text{ is a regular measure}
+    \]
+\end{lemma}
+\begin{proof}
+    Folland p99. 这显然, 因为 $f$ locally integrable 就说明 $f \, dm$ 是 locally finite 的.
+\end{proof}
+
+
+
+\begin{lemma}
+    如果 $\rho, \lambda$ 是 signed/complex measure 并且 $\rho \bot \lambda$, 那么 \[
+    \rho, \lambda \text{ are regular measures} \iff \rho + \lambda  \text{ is a regular measure}
+    \]
+\end{lemma}
+
+\begin{proof}
+在 hw 10 中.\\
+Note:  STS it for positive measure, 这是因为对于 regular signed / complex measure 而言, \[ 
+    \lambda \perp \rho \quad \iff \quad \exists A
+    \in  \mathcal{A}\; \text{ s.t. } \; |\lambda|(A^c)=0\text{ and }|\rho|(A)=0  \quad \iff \quad |\lambda| \perp |\rho|
+    \]
+ 并且从而     \[
+\nu=\lambda+\rho ,   \lambda \perp \rho \implies |\nu|=|\lambda + \rho| = |\lambda|+|\rho|
+\]
+这一命题的证明也在 hw 10 中,\\
+\end{proof}
+
+
+
+
+\section{LDT meets LRNT: 任何 regular Borel measure $\nu$ on $\mathbb{R}^n$ 对于 $m$ 的 RN-derivative $=$ relative density}
+\begin{theorem}{LDT meets LRNT: computing RN derivative on $\mathbb{R}^n$}
+    Let $\nu$ be a regular Borel measure on $\mathbb{R}^n$, with LRN decomposition $$\nu = \lambda + \rho, \quad d\rho = f \, dm,\quad  \lambda \bot m$$即\[
+    d\nu = d\lambda  + f\,dm
+    \]
+那么: 对于 $m$-a.e. $x\in \mathbb{R}^n$, 都有: \[
+    \lim_{r \to 0} \frac{\nu(B(x,r))}{m(B(x,r))}  = f(x)
+    \]
+\end{theorem}
+\begin{remark}
+    Also true with $B(x,r)$ replaced with shrinking $E_r$.\\
+    这一 Thm 一句话概括即: \textbf{如果 $\nu$ 是一个 regular measure, 那么几乎处处, 我们都可以用这一点上的 density of $\nu$ over $m$ 来获得它对 $m$ 的 RN derivative $f$.}
+\end{remark}
+
+\begin{proof}
+由 $\nu=\lambda+\rho$ 得到:
+$$
+\begin{aligned}
+\frac{\nu(B(x, r))}{m(B(x, r))}=\frac{\lambda(B(x, r))}{m(B(x, r))}+\frac{\rho(B(x, r))}{m(B(x, r))}
+\end{aligned}
+$$
+\textbf{By LDT, 我们有: }$$
+\lim _{r \rightarrow 0} \frac{\rho(B(x, r))}{m(B(x, r))}=f(x), \quad \text { for } m \text {-a.e. } x \text {. }
+$$
+于是, 原命题即转化为 WTS: $$
+\lim _{r \rightarrow 0} \frac{\lambda(B(x, r))}{m(B(x, r))}=0, \quad \text { for } m \text {-a.e. } x \text {. }
+$$
+(Notice: 这里 $0$ 也就是 $d \lambda / dm$, 因为两个 mutually singular 的 measure，其 RN derivative = $0$ a.e.).\\
+By lemma: 因为 $\nu$ regular, 且 $\lambda \perp \rho $ ,可以推出: $\lambda,\rho $ 也是 regular 的.\\
+WLOG 我们可以 suppose $\lambda$ 是 positive measure, 因为 $\lambda \perp m \iff |\lambda| \perp m$, 并且$|\lambda (E)| \leq |\lambda|(E)$ for any $E$. 因而 $\lambda$ 是 positive measure 的情况中这个极限为 $0$ 也自然推广到 complex measure 上.\\
+注意: 由于 $\lambda \perp m$, 我们可以选取 Borel set $A$ such that \[
+\lambda(A) = 0, \quad m(A^c) = 0
+\]从而: 只需要证明 $\lim _{r \rightarrow 0} \frac{\lambda(B(x, r))}{m(B(x, r))}=0$ for a.e. $x\in A$ 就可以了, 因为 $A^c$ 本身也是 $m$ 的 null set.\\
+我们 set: \[
+F_k : = \bigg\{x\in A : \lim _{r \rightarrow 0} \frac{\lambda(B(x, r))}{m(B(x, r))}\geq  \frac{1}{k}  \bigg\}
+\]
+从而 STS: 对于任意 $k$, $m(F_k) = 0$.\\
+我们 Fix 一个 $k$, by $\lambda$ 的 inner regularity, STS: 对于任意的 cpt $K \subset F_k$ compact, 都有 $m(K) = 0$. \\
+于是我们 fix 一个 compact set $K\subset F_k$, 并 fix $\epsilon > 0$, STS: $m(K) < \epsilon$.\\
+By $\lambda$ 的 outer regularity, 存在 $U_{\epsilon}\supset A$ open 使得 \[
+\lambda (U_\epsilon) < \frac{\epsilon}{3^n k }
+\]
+By $F_k$ 的定义, 对于任意的 $x\in F_k$, 都存在某个 $r_x > 0$ 使得 \[
+\nu(B(x,r_x) ) > \frac{1}{k} m(B(x,r_x) )
+\]
+Since \[
+K \subset \bigcup_{x\in K} B(x,r_x)
+\]从而 by finite open covering thm, 一定存在某个 finite set $K'$ 使得 \[
+K \subset \bigcup_{x\in K'} B(x,r_x)
+\]
+我们 recall VItali covering lemma: For given collection of balls $\{B_j \subset \mathbb{R}^n\}_{j=1}^k$, 存在 \textbf{disjoint} subcollection $\{B_{j_1},\cdots, B_{j_m}\}$ 使得\[
+\bigcup_{j=1}^k B_j  \subset \bigcup_{i=1}^m (3B_{j_i}) 
+    \]
+代入这里, 得到: 存在 $K'' \subset K'$ s.t. for all $x\in K''$, $B(x,r_x)$ 都是 disjoint 的, with \[
+K \subset\bigcup_{x\in K''} 3 B(x,r_x)
+\]
+于是 \begin{align*}
+    m(K) &\leq \sum_{x\in K''} m(3B(x,r_x))\\
+    & = 3^n  \sum_{x\in K''} m(B(x,r_x))\\
+    &\leq 3^n   k \sum_{x\in K''} \lambda(B(x,r_x))\\
+    &\leq 3^n k \lambda(U_\epsilon) \leq  \epsilon
+\end{align*}
+Since $\epsilon$ 任意, $m(K) = 0$.\\
+Since $K$ 任意, $m(F_k) = 0$.\\
+Since $k$ 任意, \[
+m\bigg( \bigg\{x\in A : \lim _{r \rightarrow 0} \frac{\lambda(B(x, r))}{m(B(x, r))} > 0  \bigg\}\bigg) =  0 
+\]
+从而得证.
+\end{proof}
+ \begin{remark}
+     这实际上是一件比较自然的事情. 因为 $\lambda\perp m$, 那么存在一个划分: 使得某边 $\lambda$ null, $m$ 具有全测度.   在这一边几乎每一点上, $\lambda$ 相对于 $m$ 的密度理应为 $0$; 而另一边, $m$ 是零测度的; 从而整体, 在至多一个 $m$ 的 null set 外,  $\lambda$ 相对于 $m$ 的密度为 $0$.\\
+     在这个证明中, 我们巧妙地同时运用了 inner 和 outer regularity 来简化要证明的结论, 最后 reduce to finite open covering 并自然地使用  VItali covering lemma 来 bound measure. 属于比较好看的证明.
+ \end{remark}
+
+
+\section{Differentiation on $\mathbb{R}$}
+\subsection{$\{\text{positive regular Borel measures on }\mathbb{R}\} \simeq \{\text{distribution functions }F:\mathbb{R}\to\mathbb{R} \}$}
+Recall that: 
+\textbf{每个 distribution function (非严格 increasing, right ctn function) 都对应了唯一的一个  regular Borel measures $\mu_F$ on $\mathbb{R}$, 反之亦然.}\\
+给定一个 regular Borel measures $\mu_F$,
+$$
+F_\mu(x ) := \begin{cases}
+    \mu((0,x]) \quad  , x \geq 0 \\
+     -\mu((x,0]) \; , x < 0
+\end{cases}
+$$
+为它的 unique distribution function. 即 $\mu((a,b]) = F(b) - F(a)$, for all h-intervals.\\
+而给定对于 distribution function $F$, 我们 define $\mu_0$ by:
+$$
+\mu_0(\bigcup_{i=1}^n (a_i, b_i]) = \sum_{i=1}^n (F(b_i) - F(a_i))
+$$
+然后 \textbf{by Hahn-Kolmogrov, extend to a regular Borel measure $\mu_F$}, 使得 $\mu_F ((a,b]) = F(b) - F(a)$ for any h-interval, i.e. $F$ 是 $\mu_F$ 的 distribution function, 并且 unique in the sense that 任意其他的 such function $G$ 如果也是$\mu_F$ 的 distribition function, 则必然有 $F-G$ 为 const. 
+从而 \[
+\mu_F \longleftrightarrow F
+\]
+之间构成了一个 measures 和 functions 的空间的 bijection.
+
+distribution function 和 regular measure 之间的对应关系, 关键用处在于什么呢?  
+我们 recall 刚刚才证明的定理, 不过使用一个更 general 的 version (can easily be extended from what we proved):
+\begin{theorem}{slightly more general version of LRNT meets LDT}
+    Let $\nu$ be a regular Borel measure on $\mathbb{R}^n$, with LRN decomposition $$\nu = \lambda + \rho, \quad d\rho = f \, dm,\quad  \lambda \bot m$$那么:  对于 $m$-a.e. $x\in \mathbb{R}^n$, 取任意 nicely shrinking $\{E_r\}$ to $x$, 都有: \[
+    \lim_{r \to 0} \frac{\nu(E_r)}{m(E_r)}  = f(x)
+    \]
+\end{theorem}
+因而如果我们有一个 $\mathbb{R}$ 上的 regualr measure $\mu_G  $, 那么考虑  $E_r : = (x,x+r]$, 我们有:
+\[
+\frac{\mu_G(E_r)}{m(E_r)}  = \frac{G(x+r)-G(x)}{r}
+\]
+从而我们发现 for a.e. $x$, 都有:  \[
+\lim_{r\to 0}\frac{\mu_G(E_r)}{m(E_r)}  = G'(x)
+\]
+我们可以得到: 这\textbf{个 regualr measure $\mu_G  $ 相对于 $m$ 的 LRN derivative, 就等于它的 distribution function 的 derivative!}
+甚至, 我们可以由此判断:\textbf{ 如果 $G:\mathbb{R}\to\mathbb{R}$ 是一个 distribution function (increasing, right ctn), 那么它的 derivative 一定是 a.e. 存在的!} Since $\mu_G  $ regular $\implies$ $G$ locally intble $\implies$ by LDT, 这个 density limit 是 a.e. 存在的.\\
+至此, 我们发现了 Monotone Differentiation Theorem.\\
+
+
+\subsection{Monotone Differentiation Theorem}
+\begin{theorem}{Monotone Differentiation Theorem}
+令 $F: \mathbb{R} \to \mathbb{R}$ 为一个 increasing (nondecreasing) function, set: \[
+G(x) : = F(x+)
+\]即 $F$ 的右极限函数. (note: $G$ 一定是 \textbf{increasing} 且 \textbf{right ctn} 的, 因而是一个 distribution function)\\
+则有: 
+\begin{itemize}
+    \item $D_F := \{x: F \text{ disctn at } x \}$ 是至多 ctbl 的 (从而一定 zero measure)
+    \item $F,G$ 都 differentaitble $m$-a.e., 并且 $$F' = G' \text{ a.e.}$$
+\end{itemize}
+\end{theorem}
+
+\begin{proof}
+    \textbf{of (a):} STS that, 对于任意 $m,n \in \mathbb{N}$, \[
+    Z_{m,n}: = \bigg \{ x\in [-m,m] : F(x+) - F(x-)  \geq \frac{1}{n} \bigg \}
+    \]是一个 finite set. 从而 $D_F = \bigcup_{m,n} Z_{m,n}$ 是 at most ctbl 的.\\
+ 而 $Z_{m,n}$ 确实是 finite 的, 因为 $F(-m) - F(m)$ 是 bounded 的, 所以 $Z_{m,n}$ 一定是 finite 的. (至多经历 $F(-m) - F(m) / (1/n)$ 个这样的点).\\
+\end{proof}
+\begin{proof}
+    \textbf{of (b):}
+首先我们知道, $G$ right ctn + increasing $\implies \mu_G$ 是一个 LS (thus regular when restricted to Borel sets) measure on $\mathbb{R}$.\\
+Apply LDT to $\mu_G$, take $E_r : = (x,x+r]$ as the shrinking family to $x$.\\
+于是
+\[
+\frac{\mu_G(E_r)}{m(E_r)}  = \frac{G(x+r)-G(x)}{r}
+\]
+由 LDT \(\implies\) 上式的 limit exist for a.e. $x$ ( $\mu_G$ w.r.t. $m$ 的 RN derivative), 它就是 $G'$, 且 $G'$ a.e. 存在, 等于其 induce 的 LS measure 的 RN derivaive. \\
+现在 remains to show: $F$ 的 derivative 也 a.e. 存在, 并且和 $G$ 的相等. 我们 set: \[
+H: = G- F
+\]
+从而 STS: $H'$ a.e. 存在且为 $0$.\\
+首先, $H>0$ 并且 $H \not = 0$ 只有可能在 discontinuous points (which is at most ctbl)上. We set: \[
+\mu : = \sum_{x\in D_F} H(x) \delta_x  
+\]
+从而对于任意区间 $I$, $$
+\mu(I)=\sum_{x \in D_F \cap I} H(x)
+$$
+由于 $F,G$ locally intble,\textbf{ 这个 $\mu$ 是一个 regular Borel measure}.\\
+并且, 这个 $\mu$ 的 null set 为 $D_f^c$, 而 $D_f$, as we have proved, is at most ctbl, 因而是 $m$ 的 null set. 从而得到: \[
+\mu \perp m
+\]于是 \[
+\frac{d\mu}{d m} = 0\quad a.e
+\]
+从而由 LDT 得: \[
+\frac{\mu((x-r,x+r))}{2r} \overset{r\to 0}{\to} 0 \quad a.e.
+\]
+因而对于任意的 $h> 0$,  \[
+ \bigg|\frac{H(x+h) - H(x)}{h} \bigg| \leq \frac{H(x+h) + H(x)}{|h|}\leq \frac{\mu((x-2|h|,x+2|h|))}{4|h|} \overset{h\to 0}{\to} 0 
+\]
+finishing the proof.
+\end{proof}
+\begin{remark}
+\textbf{As conclusion: \(\mathbb{R}\) 上的任意 increasing 函数 $F$, 其 right limit induce 的 LS measure 对于 $m$ 的 RN derivative, 就等于它的 derivative a.e.}
+\end{remark}

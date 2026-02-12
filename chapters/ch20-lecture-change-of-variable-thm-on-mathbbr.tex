@@ -1,0 +1,133 @@
+\chapter{Change of Variable Thm on $\mathbb{R}^n$[Fol 2.6, finished]}
+\section{COV}
+\begin{theorem}{general change of variable theorem}
+Suppose $\Omega \subset \mathbb{R}^n$ \textbf{open}, $G: \Omega \to \mathbb{R}^n$ 为一个 $C^1$ \textbf{diffeomorphism}.\\
+Claim: 
+\begin{itemize}
+    \item[(a)] 如果 $f:G(\Omega)\to \mathbb{C}$ 上是 Lebesgue measurable 的, 则 $f \circ G:\Omega \to \mathbb{C}$ 也是 Lebesgue measurable 的. 并且, 如果 $f \in L^+(G(\Omega ),m)$ 或者 $f \in f \in L^1(G(\Omega ),m)$, 则有\[ \int _{G(\Omega)}  f\; dm = \int_\Omega (f\circ G) \, |\det DG |\; dm    \]
+    \item[(b)]  如果 $E\subset \Omega$ 是 Lebesgue measurable set, 则 $G(E)$ 也是 Lebesgue measurable set, 并且 \[ m(G(E)) = \int_E |\det DG| \; dm  \]
+\end{itemize}
+\end{theorem}
+\begin{proof}
+首先, 类似于上一个 lecture 中的各个证明, 只需要 prove for Borel measurable functions 和 Borel sets 就可以了. 我们分为五步证明.\\
+\textbf{Step 1: 我们首先证明, 在 $E$ 为一个 closed cube 的情况下} (我们转而用 $Q$ 来表示它), 有 \[
+m(G(Q)) \leq \int_Q |\det DG(x)| \; dx
+\]
+\textbf{Proof of Step 1}: \[Q = \{x : ||x-a||_{\sup} \leq h\}  \]
+By MVT 容易得到, 对于任意的 $x\in Q$, 有: \[
+||G(x)-G(a)||_{\sup} \leq h \cdot ({\sup}_{y\in Q} ||DG(y)||_{\sup})
+\]
+(by bounding each entry.)\\
+从而, 我们发现  $G(Q)$ \textbf{是 contained in 一个边长是 $h \cdot {\sup}_{y\in Q} ||DG(y)||_{\sup} $ 的 cube 的}.\\
+从而有: \[
+m(G(Q)) \leq ({\sup}_{y\in Q} ||DG(y)||)^n m(Q)
+\]
+在 invertible $T$ 的作用下, $T^{-1}\circ G$ 仍然是一个 diffeomorphism, 从而 
+\begin{align}
+    m(G(Q)) &= |\det T| m(T^{-1}(G(Q))) \\
+    &\leq |\det T|({\sup}_{y\in Q} ||T^{-1}DG(y)||)^n m(Q)
+\end{align}
+Let $\epsilon >0$.\\
+由于 $DG$ 是 continuous 的, $DG(x)^{-1} DG(y)$ 也是 ctn 的 (从而 \textbf{uni.ctn.} in the compact cube), 我们对于任意 $\epsilon > 0$ 都可以找到一个 $\delta >0 $ 使得 对于任意的 $y,z \in Q$ s.t. $||y-z||_{\sup} \leq \delta$, 都有 
+\[ ||DG(x)^{-1} DG(y)||    \leq 1+ \epsilon\]
+于是我们可以把 $Q$ 切分成 interior disjoint 的 closed subcubes $Q_1,\cdots,Q_N$, 标记其各个中心为 $x_1,\cdots x_N$, 其每个的 side length 都至多为 $\delta$,  从而有 $G(Q) \subset \bigcup_{j=1}^N m(G(Q_j)) $. 
+于是
+\begin{align}
+    m(G(Q)) &\leq \sum_{j=1}^N m(G(Q_j)) \\
+    & \leq \sum_{j=1}^N |\det DG(x_j)| \, \big( {\sup}_{y\in Q_j} ||DG(x_j)^{-1} DG(y)||_{\sup}\big)^n m(Q_j)\\
+    &\leq (1 + \epsilon) \sum_{j=1}^N |\det DG(x_j)| \, m(Q_j)\\
+&    \rightarrow  (1+\epsilon)\,|\det DG(x)| \,m(Q) \quad \text{ as } \quad\delta\to 0 \\
+& \rightarrow |\det DG(x)| \,m(Q)=\int_Q |\det DG(x)| \; dm \quad \text{ as } \quad\epsilon\to 0
+\end{align}
+证明了这一结论, 我们就完成了这个 proof 的一大半.\\\\
+\textbf{Step 2: }Prove \[m(G(U)) \leq \int_U|\det DG(x)| \; dm\] for open $U$ 的 case.\\
+\textbf{Proof of Step 2}: Directly follows from 上一 lecture 的这个 statement: 任意 open $E \subset\mathbb{R}^n$ 都是 countable disjoint interior cubes 的 union.\\\\
+\textbf{Step 3:} Prove \[m(G(E)) \leq \int_E |\det DG(x)| \; dm\] for $E$ Borel 的 case.\\
+\textbf{Proof of Step 3:} Apply step 2 的结论, 使用 MCT for $L^+$ case, 使用 DCT for $L^1$ case.
+至此, 我们完成了 (b) 的证明的一个方向, 由此可以完成 (a) 的不等式的一个方向:\\\\
+\textbf{Step 4}: 证明 \[
+\int _{G(\Omega)} f\; dm \leq \int_{\Omega  }f\circ G \,|\det DG(x)| \; dm
+\]
+simple function 的 case reduces to measure, 而 $L^+$ 的 case follows from MCT.\\\\
+\textbf{Step 5}: 不等式的另一方向: 其实很简单, 因为 diffeomorphism 的 inverse 仍然是 diffeomorphism, 所以 apply inverse 可得.\\
+注意, 这只是 for Borel $E$ 和 $L^+$ Borel measurable $f$, 不过我们容易接着推导出 Lebesgue measurable $E$ 的情况和 $f \in L^+(m)$ 的情况; 从而再接着推导出  $f\in L^1(m)$ 的情况.
+\end{proof}
+\begin{remark}
+这个证明写得比较潦草. 详情见 Folland 2.47.\\
+但是大概思路都比较简单. 其中比较困难的是 Step 1 中的各种 error bounds. 很麻烦.\\
+\end{remark}
+
+
+\section{application of COV: polar coordinate}
+\begin{definition}{mapping from Euclidean coord to polar coord}
+ 我们定义: \[
+\Phi: \mathbb{R}^n \setminus \{0\}  \rightarrow \ (0,\infty) \times S^{n-1}
+\]by: \[
+x \mapsto (r\in \mathbb{R},\theta \in\mathbb{S^{n-1}})
+\]
+其中, \[
+r = |x| ,\quad \theta =  \frac{x}{|x|} \in S^{n-1}
+\]
+   
+\end{definition}
+这是一个很直观的坐标变换, 即一个 diffeomorphism.\\
+
+\begin{definition}{a Borel measure on $(0,\infty) \times S^{n-1}$}
+    我们定义 \[
+    m_*(E) := m(\Phi^{-1}(E))
+    \]
+\end{definition}
+这是一个通过坐标变换的 preimage 的 Borel measure 定义的新的 Borel measure.\\
+
+\begin{theorem}
+Define Borel measure $\rho$ on $(0,\infty)$ by: \[
+\rho(E) = \int_E r^{n-1} \; dr
+\]
+存在 unique 的 Borel measure $\sigma_{n-1}$ on $S^{n-1}$, 使得 for Borel measurable $f:\mathbb{R}^n \to \mathbb{C}$ 且 $f\geq 0$ or $f\in L^1(m)$, 有 \begin{align}
+    \int_{\mathbb{R}^n} f(x) \; dm &\overset{COV}{=} \int_{(0,\infty)\times S^{n-1}} f(r\theta) \; dm_*\\
+    &\overset{Fubini}{=}\int_0^{\infty}  \int_{S^{n-1}} f(r\theta) \; d\sigma \, d\rho\\
+    &= \int_0^{\infty}  r^{n-1} \int_{S^{n-1}} f(r\theta) \; d\sigma \, dr
+\end{align}
+\end{theorem}
+\begin{proof}
+    见 Folland 2.49.
+\end{proof}
+
+\begin{remark}
+
+这里 $S^{n-1}$ 的 unique measure $\sigma$ 的计算公式是: \[
+\sigma(E) = n\cdot m\bigg(\Phi^{-1}\big( (0,1)\times E  \big)\bigg) = n\cdot m\{r\theta \mid   0<r \leq 1, \theta \in E\}
+\]
+这很容易直观: \pic[0.4]{assets/ch2-pics-image-20250312031159838.png}
+这里 $n=2$, \textbf{$m(E_1)$ 表示的单位圆下, $E$ 的弧长下的扇形面积, 而 $\sigma(E)$ 表示 $E$ 的 arc length.}\\
+(类比, 在 $n=3$ 的情况下, $m(E_1) $ 表示单位球下, $E$ 的球面下的锥形体积, $\sigma(E)$ 表示 $E$ 在 $S^2$ 中的球面面积.)
+\end{remark}
+
+\begin{remark}
+    对于 $E = S^{n-1}$ 即全集的情况 , 这个 measure 有固定的计算公式. \[
+    \sigma(S^{n-1}) = \frac{2\pi^{\frac{n}{2}}}{\Gamma(\frac{n}{2})}
+    \]
+\end{remark}
+\begin{example}
+    $\sigma(S^1) = 2\pi$, $\sigma(S^2) = 4\pi$.
+\end{example}
+
+
+
+\begin{example}
+    使用 polar coordinate 计算积分: \[
+    \int _{\mathbb{R}^n} e^{-a|x|^2} \; dx = (\frac{\pi}{a})^{\frac{n}{2}}
+     \]
+这是因为: \[
+I_2 = 2\pi \int_0^\infty re^{-ar^2} \; dr = \frac{\pi}{a}
+\]
+而由于 \[
+e^{-a|x|^2} = \prod_{j=1}^n e^{-ax_j^2}
+\]
+我们得到 \[
+I_n  = (I_1)^n
+\]
+特别地, \[
+I_2  = I_1^2, \quad \text{thus } I_1  = (\frac{\pi}{a})^{\frac{1}{2}}
+\]
+\end{example}

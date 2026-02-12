@@ -1,0 +1,148 @@
+\chapter{Fubini's Theorem and Lebesgue integral in $\mathbb{R}^n$ [Fol 2.5, finished; 2.6]}
+recall Tonelli's Theorem: Given $f \in L^+(X \times Y)$, set $g(x) := \int f_x d\nu $, $h(y) := \int f^y d \mu$. 
+Then $g \in L^+(X)$, $h \in L^+(Y)$, 以及有: \[
+\int f \; d(\mu \times \nu) = \int g \; d \mu = \int h \; d\nu
+\]
+展开后可写作: \[
+\int f \; d(\mu \times \nu)  = \iint  f(x,y) \; d\nu(y) d\mu(x) = \iint f(x,y) \; d\mu(x) d\nu(y)
+\]更加简洁可写作: \[
+\int f \; d(\mu \times \nu) = \iint f \; d\nu d\mu  = \iint f \; d\mu d\nu
+\]
+
+\begin{corollary}
+    if $f \in L^1(X\times Y)$ and $f \geq 0$ then 
+    \begin{itemize}
+        \item     $g(x) < \infty$ for a.e. $x$
+        \item $h(y) < \infty$ for a.e. $y$
+    \end{itemize}
+\end{corollary}
+\begin{remark}
+    在 product measure space 上 measurable 的可积函数, 在每个成分上, 都不能有过多的 infinity point.
+\end{remark}
+Next: Fubini's Theorem.\\
+Fubini's Theorem 是 Tonelli's Theorem 对 $\mathbb{C}$-valued 函数 (instead of $\mathbb{R}_{\geq 0}$-valued) 的推广. 但是其实证明很 trivial. 
+\section{Fubini's Theorem}
+\begin{theorem}{Fubini's Theorem}
+ 条件: $f \in L^1(\mu \times \nu)$,\\
+ 结论:
+    \begin{itemize}
+        \item $f_x \in L^1(\nu)$ for a.e. $x$, $f^y \in L^1(\mu)$ for a.e. 
+        \item The a.e. defined functions: \[ g(x) := \int f_x \;d\nu \in L^1(\mu),\quad h(x) := \int f^y \;d\nu \in L^1(\nu) \]
+        \item \[ \int f \; d(\mu \times \nu)  = \int g \; d\mu = \int h \; d\nu  \;\; (= \iint f\; d\mu d\nu)\]
+    \end{itemize}
+\end{theorem}
+\begin{proof}
+\(f = \Re f + i \Im f \), so WLOG can assume $f$ is $\mathbb{R}$-valued.\\
+又 $f = f^+ - f^-$, 直接 apply Tonellis's Thm 可得.
+\end{proof}
+\begin{remark}
+    Tonelli and Fubini's Theorem 不仅有用在可以拆分积分以进行计算, 而且有用在积分换序. \\
+    实际上, 根据它的条件可以发现, 积分可换序的条件是很宽裕的, 只要这个函数 $f$ 在 $L^+$ 或者 $L^1$ space 中就可以了.
+\end{remark}
+
+
+\begin{example} 
+求和换序的合理性:\\
+考虑 $$(X, \mathcal{A}, \mu) = (Y , \mathcal{B}, \nu) = (\mathbb{N}, \mathcal{P}(\mathbb{N}), \mu_{counting})$$if $a_{mn} \in \mathbb{C}$ for $(m,n) \in \mathbb{N}^2$ and \[
+\infty > \sum_{m,n} |a_{mn}| =: \sup_{F \subset \mathbb{N}^2  \text{finite}} \sum_{(m,n) \in F}  |a_{m,n}|
+\]
+Thm: 对于任意 $n\in\mathbb{N}$,  $\sum_m a_{mn}$ conv absly to some $b_n \in \mathbb{C}$; \\
+同样, 对于任意 $m\in\mathbb{N}$, $\sum_n a_{mn}$ conv absly to $c_m \in \mathbb{C}$.
+以及 $\sum_n b_n, \sum_m c_m$ conv absly to $\sum_{m,n} a_{mn}$.\\
+即: \[
+\sum_{n=1}^\infty \sum_{m=1}^\infty |a_{mn}| = \sum_{m=1}^\infty \sum_{n=1}^\infty |a_{mn}| = \sum_{(m,n) \in\mathbb{N}^2} |a_{mn}|
+\]
+\end{example}
+
+
+\subsection{complete Fubini's Theorem}
+\begin{remark}
+即便 \((X, \mathcal{A}, \mu)\), $ (Y , \mathcal{B}, \nu)$ 都 complete, product space \((X\times Y , \mathcal{A} \otimes \mathcal{B} , \mu\times \nu  )\) \textbf{不一定 complete! (甚至说基本很少 complete)}
+\end{remark}
+
+\begin{example}
+      考虑 $(X, \mathcal{A}, \mu) = (Y , \mathcal{B}, \nu) = (\mathbb{R}, \mathcal{L}, m)$
+       考虑一个 Vitali set. \[
+       V \times \{0\} \subset \mathbb{R} \times \{0\} \text{ is a subnull set, not measurable}
+       \]
+\end{example}
+
+但是如果我们 consider completion: \[
+(X \times Y , \overline{\mathcal{A} \otimes \mathcal{B}},  \overline{\mu \times \nu}   ) 
+\]
+\begin{theorem}{complete Fubini-Tonelli}
+对于 complete measure space \((X, \mathcal{A}, \mu)\), $ (Y , \mathcal{B}, \nu)$, 取它们的 product measure space 的 completion: \[
+(X \times Y , \overline{\mathcal{A} \otimes \mathcal{B}},  \overline{\mu \times \nu}   ) 
+\]
+我们将 $\overline{\mathcal{A} \otimes \mathcal{B}}$ 简易写作 $\mathcal{L}$, $\overline{\mu \times \nu}   $ 简易写作 $\lambda$.\\
+Suppose $f: X \times Y \to \mathbb{C}$ is $\mathcal{L}$-measurable 并且 $f \in L^+(\lambda)$ or $f \in L^1(\lambda)$, 则有
+\begin{itemize}
+    \item $f_x$ 是 $\mathcal{B}$-measurable 的 for a.e. $x$ 且 $x \mapsto \int f_x \; d\nu$ 是 measurable 的
+    \item $f_y$ 是 $\mathcal{A}$-measurable 的 for a.e. $y$ 且 $y \mapsto \int f_y \; d\mu$ 是 measurable 的
+\end{itemize}
+并且, 在 $f \in L^1(\lambda)$ 的情况下,  $f_x, f_y$, $x \mapsto \int f_x \; d\nu$, $y \mapsto \int f_y \; d\mu$ 也是 \textbf{integrable} 的, 即 $\in L^1(\lambda)$, 并且 \[
+\int f \; d\lambda = \iint  f \; d\mu d\nu =  \iint  f \; d\nu d\mu 
+\]
+\end{theorem}
+\begin{proof}
+    exercise. 比较简单.
+\end{proof}
+\begin{remark}
+    这一定理的意思是, 在 $\mu,\nu$ 是 complete measure 的情况下, $\mu \times \nu$ 的 completion  $\overline{\mu \times \nu}   $ \textbf{虽然并不等于 $\mu \times \nu$, 但是 $ L^1(\overline{\mu \times \nu})$ 的函数的积分却可以当作 $ L^1(\mu \times \nu)$ 的函数的积分, 从而分成两个积分.}
+    这是因为 因为完备化测度只是增加了一些\textbf{原本测度为零的集合的子集}, 这些集合不会影响积分计算. 这一定理的直接应用是 Lebesgue integral on $\mathbb{R}^n$.
+\end{remark}
+
+\subsection{remark: integral of 非负函数等于 area under graph}
+\begin{theorem}
+    令 $(X,\mathcal{A}, \mu)$ 为一个 arbitrary measure space, $f \in L^+(\mu)$ 为 arbitrary 可测非负函数, 我们定义: \[
+    G_f := \{(x,y) \in X \times [0,\infty] : 0 \leq y \leq f(x)\}
+    \]
+    Claim: $G_f$ 是 $(\mathcal{A}\times \mathcal{B}(\mathbb{R}))$-measurable 的, 并且 \[
+    (\mu \times m) (G_f) = \int f \; d\mu
+    \]
+\end{theorem}
+\begin{proof}
+    In hw 6.
+\end{proof}
+\begin{remark}
+$G_f$ 即 area under the graph of $f$. 这一 statment 是一个\textbf{正式的表达 of ``integral of 非负函数等于 area under graph"}. 我们也可以推广它到 $L^1$ 上 (正负 part 的差), which is trivial.
+\end{remark}
+
+
+\section{Lebesgue measure in $\mathbb{R}^n$}
+这是 product measure 最常见的应用和例子. 
+\begin{definition}
+    $(\mathbb{R}^n, \mathcal{L}^n, m)$ Lebesgue measure is \textbf{completion of } $(\mathbb{R}^n, \mathcal{B}_{\mathbb{R}^n}, m|_{borel})$. 
+\end{definition}
+where $ \mathcal{B}_{\mathbb{R}^n} =  \mathcal{B}_{\mathbb{R}} \otimes \cdots \otimes \mathcal{B}_{\mathbb{R}}  $
+\(\mathcal{L^n }  = \{ \text{Leb meas sets} \}  \supset  \mathcal{B}_{\mathbb{R}^n}\)
+Write: \[  \int f \;d m^n   \quad 
+\]
+
+
+\begin{theorem}{Fubini-Tonelli for $m^n$}
+    Suppose $f \in L^+(\mathbb{R}^n)$ or $L^1(\mathbb{R}^n)$
+\begin{align}
+\int f \; dm^n &= \int \cdots \int f(x_1, \cdots, x_n) 
+\; dx_1 \cdots dx_n        \\
+& = \int \cdots \int f(x_1, \cdots, x_n) 
+\; dx_n \cdots dx_1
+\end{align}
+\end{theorem}
+
+\begin{example}
+    Show: \[
+    \int_0^\infty e^{-sx} \frac{\sin^2(x)}{x} \; dx = \frac{1}{4} \log(1+ 4s^{-2})
+    \]
+for $s > 0$, by integrating $e^{-sx} \sin 2xy = f(x,y)$ over the rectangle $x \in (0,\infty), y \in (0,1)$.\\
+Sketch: $f \in L^1$ (since it is ctn on $\mathbb{R}$)
+以及 \[
+|f| \leq e^{-sx}, \quad \int_{\mathbb{R}} e^{-sx} < \infty
+\]
+可计算得 \[
+\int_0 ^1 \sin 2xy \; dy = \frac{1}{2x} \sin^2 x
+\]
+而后 compute \[
+\int_0 ^1    e^{-sx} \sin 2xy \; dy
+\] by integration by part for twice.
+\end{example}

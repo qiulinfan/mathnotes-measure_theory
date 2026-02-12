@@ -1,0 +1,150 @@
+\chapter{distribution function and Borel measures on $\mathcal{B}(\mathbb{R})$ [Fol 1.5]}
+This lecture: 
+1. distribution function 是 increasing 且 right continuous 的, 
+2. 任意 increasing 且 right continuous 的函数可以作为 distribution function, 用它来构造它对应的 measure.
+
+
+\section{distribution function of a locally finite (i.e. regular) Borel measure}
+\begin{definition}{distribution function of $\mu$}
+给定一个 \textbf{locally finite (finite on all compact sets)} 的 \textbf{Borel measure} on $\mathbb{R}$ (即 $(\mathbb{R}, \mathcal{B}(bR), \mu)$), 我们定义:
+$$
+F_\mu(x ) := \begin{cases}
+    \mu((0,x]) \quad  , x \geq 0 \\
+     -\mu((x,0]) \; , x < 0
+\end{cases}
+$$
+这个函数被称为 $\mu$ 的 \textbf{distribution function.}
+\end{definition}
+\begin{remark}
+一个 \textbf{locally finite (finite on all compact sets)} 的 Borel measure on $\mathbb{R}^n$ 被称为一个 regular measure.\\
+ 在 Ch 3 中, 我们将在讨论 $\mathbb{R}^n$ 上 regular measure 对于 Lebesgue measure 的 derivative.
+\end{remark}
+\begin{proposition}
+        容易发现: $F$ 是 $\mu$ 的 distribution function, 当且仅当 $\mu((a,b]) = F(b) - F(a)$, 任取这样的 interval.
+\end{proposition}
+这两个定义是等价的. 
+
+
+
+\begin{theorem}{distribution function is increasing and right ctn}
+对于 $\mathbb{R}$ 上的任意 locally finite Borel measure $\mu$, 其 distribution function $F_\mu$ 都是 increasing 且 right continuous 的.
+(right ctn:$$F_\mu(a) = \lim_{x\rar a^+} f(x)$$
+\end{theorem}
+\begin{proof}
+    increasing: trivially by monotonicity of measure.\\
+    right continuous: follows from measure 的 ctnity. 正轴上: $\mu((0,x+ 1/n])$ 的 sequence 极限为 $\mu(0,x])$, by ctn from above; 负轴上, $\mu((x+ 1/n,0])$ 的 sequence 极限为 $\mu((x,0])$, by ctn from below.\\
+\end{proof}
+\begin{remark}
+   \textbf{ Note: distribution function 是 right ctn 的, 但却未必是 left ctn 的.}
+   因为我们构造离散的 measure, 使得这个 distribution function 具有间断点. 这样导致了左不连续.
+   反例: 例如 atomic measure. 
+\end{remark}
+
+
+
+
+
+\section{any increasing and right ctn function is a unique distribution function}
+\begin{definition}{h-interval}
+    我么定义形如 $(a,b]$, $(-\infty, b]$ 的 $\mathbb{R}$  的子集, 以及 $\varnothing$, $\mathbb{R}$, 为 h-intervals.
+\end{definition}
+h-intervals 即\textbf{所有的左开右闭区间.}
+\pic[0.2]{assets/ch1-pics-1.png}
+
+
+\begin{lemma}{h-intervals form an algebra and generate borel set}
+    $$
+    \mathcal{A}_0 := \{  \text{finite (disjoint) unions of h-intervals}\}
+    $$
+是一个 algebra, 并且
+$$
+<\mathcal{A}_0> = \mathcal{B}(\mathbb{R})
+$$
+\end{lemma}
+\begin{proof}
+    trivial. follows from lec 2 的 generating set of borel set on $\mathbb{R}$.
+\end{proof}
+
+
+
+
+\begin{theorem}{\textbf{任意 increasing 且 right ctn 函数都是某个 regular Borel measure 的 distribution 函数}}
+取 lemma 中的 $\mathcal{A}_0$.
+对于\textbf{任意的 increasing 且 right ctn 的 $F: \mathbb{R} \to \mathbb{R}$,} 我们 define $\mu_0: \mathcal{A}_0 \to [0,\infty]$, by:
+$$
+\mu_0(\bigcup_{i=1}^n (a_i, b_i]) = \sum_{i=1}^n (F(b_i) - F(a_i))
+$$ 并规定 $\mu_0(0) = 0$, 以及 $F(\infty) = \lim_{x\rar \infty } F(x)$\\,
+\textbf{Claim 1: $\mu_0$ 是一个 $\mathcal{A}_0$ 上的 $\sigma$-finite premeasure.}\\
+\textbf{Claim 2: (by Hahn-Kolmogrov) $\mu_0$ extend to a locally finite Borel measure $\mu_F$}, 并且 $\mu_F ((a,b]) = F(b) - F(a)$ for any h-interval, i.e. $F$ 是 $\mu_F$ 的 distribution function.\\
+Claim 3: \textbf{$F$ 是 $\mu_F$ 的唯一 distribution function up to constant term}, in the sense that 任意其他的 such function $G$ 如果也是$\mu_F$ 的 distribition function, 则必然有 $F-G$ 为 const. 
+\end{theorem}
+
+\begin{proof}
+Claim1 
+\begin{enumerate}
+    \item well-definedness of $\mu_0$: 对于两个结果一样的 union, finding common refinement 即可.
+    \item $\mu_0(\varnothing) = 0$: 因为 $\varnothing$ 就是 $(a,a]$.
+    \item finite additivity: trivial.
+    \item $\sigma$-finiteness: each $\mu_0((n, n+1]) < \infty$
+    \item \textbf{ctbl additivity: nontrivial, 下面详细展开.}
+\end{enumerate}
+Suppose $A_1, A_2, \cdots$ 是 seq of disjoint h-intervals in $\mathcal{A}_0$. Let $A := \bigsqcup_{i}A_i $.\\
+WTS: $\mu_0(A) = \sum_i \mu_0(A_i)$.\\
+(1) WTS $\mu_0(A) \geq \sum_i \mu_0(A_i)$
+这个 direction easy. We define $B_n  := \bigsqcup_1^n A_i$, 由 finite additivity 得到: $\mu_0(B_n) = \sum_{i}^n \mu_0(A_i)$, 从而 
+$$
+\mu_0(A) = \mu_0(B_n) + \mu_0(A \setminus B_n) \geq \mu_0(B_n)
+$$ for each $n$, 由于这是一个 numerical seq, 可以 conclude $\mu_0(A) \geq \sum_i \mu_0(A_i)$.
+(2) WTS $\sum_i \mu_0(A_i) \geq \mu_0(A)$.\\
+这个 direction 较难, 需要用到 $\epsilon / 2^n$ 的 argument.\\
+For simplicity, 我们只需要考虑 $A_i = (a_i, b_i]$ 的 interval 形式, 其他形式 can trivially prove. 并且, 由于 $\mathcal{A}_0$ 中任何一个元素至多只有 finite 个离散的 h-intervals, 我们 \textbf{suffice to assume $A$ 是一个 h-interval.} \\
+从而, 我们也可以 denote $A = (a,b]$.\\
+Let $\epsilon > 0$.\\
+By $F$ 的 increasing 和 right ctn, 存在 $\delta, \delta_i$ s.t.
+$$
+F(a+ \delta)- F(a) \leq \epsilon
+$$
+同样地, 对于每个 $A_i$. 我们都可以找到 $\delta_i$ 使得 
+$$
+    F(b_i + \delta_i) - F(b_i) \leq \frac{\epsilon}{2^i}
+$$
+于是 $(a_i, b_i+\delta_i)_{i \in \bN}$ 就形成了一个 open covering for $[a+ \delta, b]$. By cptness, 存在一个 finite subcovering $(a_i, b_i+\delta_i)_{1 \leq i \leq N}$.\\
+By relabelling, \textbf{我们 suppose $A_i$ 是从左到右排序的. 于是每个 $b_i + \delta_i$ 都处于下一个 $A_{i+1}$ 之内.}
+\pic[0.2]{assets/ch1-pics-image-20250130183842172.png}
+从而:
+\begin{align}
+    \mu_0(A) & \leq F(b) - F(a+ \delta) - \epsilon \\
+    &\leq F(b_N + \delta_N) - F(a_1) + \epsilon \\
+    & =  F(b_N + \delta_N) - F(a_N) +\sum_1^{N-1} (F(a_{i+1}  ) - F(a_i)) + \epsilon \\
+    & \leq  F(b_N + \delta_N) - F(a_N) +\sum_1^{N-1} (F(b_i + \delta_i  ) - F(a_i)) + \epsilon \\ & < \sum_1^N (F(b_i) - A(a_i) + \frac{\epsilon}{2^i}) + \epsilon
+    \\ & < \sum_ 1^\infty \mu_0(A_i) + 2\epsilon
+\end{align}
+Claim 2, 3 都 directly follows from Hahn-Komogrov Thm.
+\end{proof}
+\begin{remark}
+    这一证明实则简单. 关键的步骤是 1. 简化问题为 union 成一个 h-interval; 2. 通过 cptness 取 finite covering；3. 对每个 $A_i $ 取一个 $\epsilon / 2^i$ 的小 cover, 最后可以被 $\epsilon$ bound.
+\end{remark}
+
+
+
+\begin{example}
+我们已经证明, 从任意的 increasing 且 right ctn 的函数都可以构造出一个以其为 distribution function 的 locally finite Borel measure on $\mathbb{R}$, 因而我们简称这样的函数都叫做 distribution function.\\
+以下为两个 distribution function 的例子:\\
+1.  Heaviside function $$H(x)  = \begin{cases}
+    1 \;\; ,x\geq 0\\
+    0 \;\; ,x < 0
+\end{cases}    $$
+2. 我们将 $\mathbb{Q}$ 以某种形式列出: $\mathbb{Q} = \{q_1, q_2, \cdots\}$
+而后定义:
+$$
+F(x) := \sum_{i = 1} ^\infty 2^{-n} H(x - r_n)   \in (0,1)
+$$
+这个函数通过有理数的次序给每个有理数赋了一个"weight", 并对于每个$x$, 把所有有理数分为 $> x$ 和 $\leq x$ 的两部分, 只把 $\leq x$ 的那部分有理数的权重算进 $F(x)$. 于是 $x$ 越大, 被算进 $F(x)$ 的有理数越多, $F(x)$ 就越大. (虽然每个有理数的权重是乱的). 这个函数在每一点上都 discrete.\\
+这个过程可推广, 不取 $\mathbb{Q}$ 而取任意的 countable sets in $\mathbb{R}$ 作为参照.
+\end{example}
+
+
+
+
+
+本 lec 总结: 通过直接定义 distribution function 来得到的 measure, 实则就是不同于直接取 interval 长度, 我们隐性地给每个点一个 mass (类似概率密度), 从而把区间的长度中每一个点加上一个权重. 最后形成一个不一定均匀的 measure. 这个 distribution 的分布曲线决定了这个 measure.

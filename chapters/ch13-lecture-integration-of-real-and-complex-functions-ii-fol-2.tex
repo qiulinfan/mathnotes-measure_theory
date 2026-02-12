@@ -1,0 +1,175 @@
+\chapter{integration of real and complex functions-II [Fol 2.3]}
+\section{corollaries of DCT}
+以下为 DCT 的 corollaries:
+
+\subsection{Fubini for series and integral}
+\begin{corollary}{Fubini for series and integral}
+对于 $L^1(\mu)$ 中的 sequence $(f_n)$,  如果 $\sum_{n=1}^\infty \int |f_n| < \infty$, 则 $$\sum_{n=1}^\infty f_n   \overset{a.e.}{\to}  F\in L^1(\mu) \;\;$$ 并且 \[  \int \sum_{n=1}^\infty f_n 
+ =    \int F = \sum_{n=1}^\infty \int f_n\]
+\end{corollary}
+\begin{proof}
+Recall \textbf{Tonelli for sum and integrals}: 对于 $\{f_n\}_{n\in\mathbb{N}}$ in $L^+(\mu)$, 有:
+$$
+\int \sum_{n=1}^\infty f_n = \sum_{n=1}^\infty \int f_n
+$$
+(又是经典 Fubini 补充 Tonelli) 这个定理是 Tonelli for sum and integrals 在 $L^1$ 上的推广.\\
+我们 set \[
+F_n : = \sum_{i=1}^n f_j\quad G:= \sum_{n=1}^\infty  |f_n|
+\]
+By Tonelli for sum and integrals, 有: \[
+\int G = \int \sum_{n=1}^\infty  |f_n| =  \sum_{n=1}^\infty \int  |f_n| 
+\]
+由条件知道, $\int G < \infty$, 因而 $G \in L^1(\mu)$.
+所以 $G$ 可以作为 $F_n $ 的 DCT bound: \[
+\int |F| \leq \int G = \sum_{n=1}^\infty \int  |f_n| 
+\] 因而 by DCT:: \[
+\int F = \lim_{n\to \infty } \sum_{i=1}^n \int f_i =  \sum_{n=1}^\infty \int f_n
+\]
+\end{proof}
+\begin{remark}
+    Fubini's for sum and integrals : 对于一个 seq of 可积函数, \textbf{如果它们的绝对积分和收敛, 那么它们的 infinite sum 函数也是可积的}, 并且可以交换积分和极限次序. \\
+    其实显然. 因为绝对积分和肯定 by tri ineq 是大于等于和的积分的, 绝对积分和能作为一个 bound function.
+\end{remark}
+
+
+\subsection{a function that is measurable in one var and ctn/diffble in another}
+
+\begin{corollary}
+  令 $(X,\mathcal{A}, \mu)$ be a measure space.\\
+  如果 $f: X \times [a,b] \to \mathbb{C}$ 满足 $f(\cdot, t) \in L^1(\mu)$ for all $t \in [a,b]$, 令 \[
+F(t) := \int f(x,t) \; d\mu(x)
+  \] 则有:
+  \begin{enumerate}
+      \item 如果 $t \mapsto f(x,t) $  对于任意 $x$ 都连续, 并且存在一个 $g \in L^1(\mu)$ 使得 $|f(t,x)| \leq g(x)$ for all $t,x$, 那么 \textbf{$F$ 也是 ctn 的.}
+      \item 如果 $\frac{\partial f}{\partial t} (x,t)$ 对于任意 $x,t$ 都存在, 并且存在一个 $g \in L^1(\mu)$ 使得 $|\frac{\partial f}{\partial t} (x,t)| \leq g(x)$ for all $t,x$, 那么 \textbf{$F$ 是 differentiable 的}, 并且 $$F'(t) = \int \frac{\partial f}{\partial t} (x,t) \; d\mu(x)$$
+  \end{enumerate}
+\end{corollary}
+\begin{proof}
+    这一证明并不困难.\\
+    For part(1), STS: $t_n \to t \implies F(t_n) \to F(t)$\\
+    Apply DCT with $f_n(x) = f(x,t_n)$, $f(x) = f(x,t)$.\\
+    For part(2), Suppose $t_n \to t$.\\
+    Apply DCT to \[
+    h_n(x) := \frac{f(x,t_n) - f(x,t)}{t_n - t}
+    \]
+    由可导得连续得 $x \mapsto \frac{\partial f}{\partial t}(x,t)$ measurable.\\
+    并且 \textbf{by MVT, }\[
+    |h_n(x)| \leq \sup_{t \in [a,b]} \Big| \frac{\partial f}{\partial t} (x,t) \Big| \leq g(x)
+    \]
+    从而我们也用 $g$ bound 住了 $h_n(x)$. \textbf{Apply DCT: }\[
+  F'(t) = \lim_{n\to \infty}  \frac{F(t_n) - F(t)}{t_n -t}  =  \lim_{n\to \infty} \int \frac{f(x, t_n) - f(x,t)}{t_n - t} = \lim_{n\to \infty} \int h_n  = \int \frac{\partial f}{\partial t} (x,t) \; d\mu(x)
+    \]
+\end{proof}
+\begin{remark}
+    由 DCT, 我们不仅可以交换积分和求极限的次序, 还可以在足够的条件下交换多变量的求导和积分的次序. 这一点是值得注意的, 因为 \textbf{DCT 描述的 sequential behavior 可以应用到证明函数 continuous 和 derivative 存在}, 使用 sequential definition. \\
+    如: 如果一个多变量函数对于 $x$ 是 measurable 的, 并且满足对于 $t$ 的 partial derivative 处处符合 DCT 条件. 那么我们可以\textbf{调换它对于 $x$ 积分和对于 $t$ 求导的顺序}.\\
+    看起来很雾但是我们看一个例子 (此为一个反例):
+\end{remark}
+
+\begin{example}
+是否有: \[
+    \frac{\partial}{\partial t} \int_{\mathbb{R}_{> 0}} e^{-tx} \; dm(x)  \overset{???}{=} \int_{\mathbb{R}_{> 0}} -x e^{-tx} \; dm(x)   = -\frac{1}{t^2} 
+    \]
+Here \[
+f(t,x) = e^{-tx}, \quad t>0, x>0
+\] 因而 \[
+\bigg| \frac{\partial}{\partial t} f(t,x) \bigg|=  xe^{-tx}, \quad t> 0 , x> 0
+\]
+尝试找到它的 dominating $g(x)$: 这个函数在 $t \to 0$ 处的上极限是 $g(x,t) = x$, 但是这个 $g$ 却不是一个 $L^1$ 函数 (在半轴上积分为 $\infty$). 从而它不可以这么交换积分和求导顺序. 但是如果把 $t$ 的范围限制在 $t \geq a \in \mathbb{R}_+$ 而不是 $t>0$, 我们就可以交换这个积分和求导顺序, 因为此时可以设定 \[
+g(x,t)  = xe^{-ax}
+\]
+\end{example}
+
+
+
+
+\section{$L^1$ as a Banach space}
+\begin{theorem}{$L^1(\mu)$ 以 integral w.r.t. $\mu$ 作为 norm 是一个 normed VS}  在 $L^1(\mu)$ 上, 我们 set \[
+||f||  := \int |f|
+\]
+    则 $(L^1(\mu), ||\cdot||)$ 为一个 \textbf{normed $\mathbb{C}$-vector space. 即, 这是一个 well-defined norm.}
+\end{theorem}
+\begin{proof}
+    recall norm 的定义, 需要符合: \begin{itemize}
+        \item Homogeneity: \[
+        ||af|| = |a|\cdot ||f||
+        \]
+        \item triangle ineq: \[
+        ||f+g|| \leq ||f|| + ||g||
+        \]
+        \item nonnegativity: \[
+        ||f|| \geq 0,\quad = \text{ iff  } f=0 \in L^1 \text{ (i.e. } f(x) = 0 \text{ a.e.)}
+        \]
+    \end{itemize}
+前两条是积分的 linearity 的下位推论. 后一条 by def.
+\end{proof}
+
+\begin{corollary}{$(L^1(\mu), ||\cdot||)$ 是一个 Banach space}
+    $(L^1(\mu), ||\cdot||)$ 的 induced metric space 是 complete 的. 即, every Cauchy seq converges.\\
+    (\textbf{从而这是一个 Banach space}. )
+\end{corollary}
+\begin{proof}
+    取一个 Cauchy seq $(f_n) $ in $L^1$.\\
+这里有一个值得 recall 的 proposition: \begin{proposition}
+在一个 metric space 中, 一个 Cauchy seq converges 当且仅当它存在一个 convergent 的 subsequence.
+\end{proposition}
+证明很简单. 对于任意的 $\epsilon$, 可以取 $\max(N,M)$, 其中 N 为使得这个子序列所有元素距离 $x_* < \epsilon / 2$ 的下标，M 为使得主序列所有元素两两之间距离 $< \epsilon / 2$ 的下标. \\
+因而我们\textbf{只需要证明存在一个 subseq $(f_{n_j}) $ s.t. $f_{n_j} \overset{j\to \infty}{\longrightarrow} f \in L^1$ 即可.}\\
+已知 Cauchy, WTS: $f_n$ 收敛且极限在 $L^1$ 中. 我们直觉: 用 Cachy 条件构造 $1/\epsilon^2$ argument. \\
+我们 pick 子下标 $(n_j)_{j\in \mathbb{N}}$ 使得对于每个 $j$ 都有 \[
+m,n \geq n_j \implies       ||f_m - f_n||_1 \leq \frac{1}{2^j}
+\]
+并 set \[
+g_j := f_{n_j} - f_{n_{j-1}}, \quad g_1 = f_{n_1}
+\]则有 \[
+\sum_{j=1}^\infty \int |g_j| \leq 1 < \infty
+\]
+从而 \textbf{by Fubini's Thm for series and seqs,} 存在: 
+\[
+f: = \lim_{j \to \infty} \sum_{i=1}^j g_j = \lim_{j \to \infty} f_{n_j}  \in L^1 \;\; \exists a.e.
+\]
+同时有 \[
+\int |f - f_{n_j} | \leq \sum_{j+1}^\infty  \int |g_j|  \leq \frac{1}{2^j} \overset{j\to \infty}{\longrightarrow} 0
+\]
+\end{proof}
+\begin{remark}
+这里就发现了 Fubini for series and seq 的用处: 把求和与积分的换序从有限推广到无限求和上, 以绝对积分和有限为条件. 因而, \textbf{绝对积分和有限的 seq 是性质强大的. }\\
+而我们可以运用这一点来发掘 function seq 的性质, 比如这里\textbf{把一个 function seq 通过构造前后项差的方式, induce 出一个绝对积分和有限的 seq, 从而用这个 seq 的积分和反向证明原 seq 的性质}.
+\end{remark}
+
+
+
+\section{density of simple function of $L^1(\mu)$}
+
+\begin{theorem}{density of simple functions in $L^1(\mu)$}
+  令 $(X, \mathcal{A}, \mu)$ 为一个 measure space,  令 $f \in L^1(\mu)$, \\
+    对于任意 $\epsilon > 0$, 都存在 simple $\phi: X \rightarrow \mathbb{C}$ in $L^1(\mu)$, 使得 \[
+    \int |f - \phi| 
+< \epsilon
+    \]
+\end{theorem}
+\begin{proof}
+    这是显然的, by 积分的定义. 我么首先把 $f$ divide 为 \[
+    f = u +iv, \quad u = u^+ - u^-,\quad v = v^+ - v^-
+    \]
+    而后对这四个非负函数 $u^+,u^-, v^+, v^-$分别使用 simple function seq approximation, 再使用 DCT:
+    \[
+   \int \lim \phi_n =     \int u^+ =  \lim \int \phi_n
+    \]
+    比方说 $(\phi_n)$ 为从下逼近 $u^+$ 的 simple function seq, 那么 $u^+$ 是它的 dominating function, 同时也是极限. 那么对于任意的 $\epsilon > 0$ 都存在一个 $n$ 使得  \[
+||u^+ - \phi_n||_1 \leq  \int u^+ -    \int \phi_n  < \epsilon
+    \]
+\end{proof}
+
+
+尤其是这一特殊情况: 
+\subsection{density of step functions in $L^1(m)$ }
+\begin{theorem}{LS measure space 的 $L^1$ space 上的 density of step functions}
+考虑 $(\mathbb{R}, \mathcal{L}, m_s)$ where $m_s$ 为一个 Lebesgue-Stieljes measure on $\mathbb{R}$, let $f \in L^1 (\mu)$,\\
+对于任意 $\epsilon >0$, 都存在 step function $\phi = \sum_{j=1}^N c_j \chi_{I_j}$, 使得 \[
+\int (f-\phi) < \epsilon
+\] where each $I_j$ 都是 open intervals.
+\end{theorem}
+\begin{proof}
+和 general case 相似. 利用 the fact that 任意一个 Lebesgue mble function 都可以用 step function 来 approximate.
+\end{proof}

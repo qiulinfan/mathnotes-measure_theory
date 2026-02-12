@@ -1,0 +1,215 @@
+\chapter{measurable function [Fol 2.1]}
+\section{general measurable function}
+\begin{definition}{$(\mathcal{M}, \cN)$-measurable function}
+Let $(X,\mathcal{M})$, $(Y,\cN)$ be measurable spaces, 如果 $f: X \rar Y$ 满足: $$B \in \cN \implies f^{-1}(B) \in \mathcal{M}$$, 则称 $f$ 为一个 $(\mathcal{M}, \cN)$-measurable function.
+\end{definition}
+从一个 measurable space 到另一个 measurable space 的 function 被称为 measurable 的条件是: 被映射到可测集的集合只能是可测集.
+
+这个定义和 topological space 上 continuous 的定义: 被映射到开集的只能是开集, 形式是完全一样的. 并且我们知道, topological space 和 measure space 也有很多相似之处. 因而连续性和可测性有一定的关系.
+
+函数的可测性的定义是 with respect to 它们所在可测空间选定的 $\sigma$-algebra 的, 就像 topologica spaces 之间函数的连续性的定义是 with respect to 它们所在的 topological spaces 选定的 topology.
+
+这两个定义都表示的是: 性质不好的集合不会被映射到性质良好的集合. (但是性质良好的集合有可能被映射到性质不好的集合.)
+
+
+\begin{proposition}{composition preserves measurability}
+    如果 $f$ 是 $(\mathcal{A},\mathcal{B})$-measurable 的, $g$ 是 $(\mathcal{B}, \mathcal{C})$-measurable 的, 那么 $g \circ f$ 是 $(\mathcal{A}, \mathcal{C})$-measurable 的.
+\end{proposition}
+\begin{proof}
+    Trivial.
+\end{proof}
+
+\begin{lemma}
+    Let $(X,\mathcal{M})$, $(Y,\cN)$ be measurable spaces, 如果 $\cN = <\varepsilon>$ for some $\varepsilon \sub Y$, 那么 
+\begin{center}
+    $f: X \rar Y$  $(\mathcal{M},\cN)$-measurable  $\Longleftrightarrow$ $f^{-1}(E) \in \mathcal{M}  \quad \forall E \sub \varepsilon$
+\end{center}
+
+\end{lemma}
+\begin{proof}
+foward direction: trivial.\\
+backward direction: Let
+$$
+D: = \{ E \sub Y \mid f^{-1}(E) \in \mathcal{M}\}
+$$
+容易证明: $D \supseteq \varepsilon$, 并且 $D$ 是一个 $\sigma$-algebra.\\
+因而 $D \supseteq <\varepsilon> = \cN$
+\end{proof}
+\begin{remark}
+    如果我们知道 $\cN$ 是由某个子集生成出来的, 那么对于映射到这个 measurable space 的函数, 只要保证这个子集中的每个集合的 preimage 都是可测集就可以了, 可以 reduce 判断 $f$ measurable 的条件.
+
+    同样类比 topological space, 如果 $Y$ 的 topology 存在一个 basis, 那么判断 $f: X\rar Y$ 连续, 只需要判断这个 basis 的 preimage 都是 open 的就好了.
+\end{remark}
+
+\begin{proposition}
+对于 topological space $X,Y$, let $f:X\rar Y$
+\begin{center}
+    $f$ continuous $\implies$$f$ 是 $(\mathcal{B}(X),\mathcal{B}(Y))$ measurable 的.
+\end{center}
+\end{proposition}
+\begin{remark}
+    topological spaces 之间, 连续函数一定是在它们的 Borel algebra 之间 measurable 的.
+\end{remark}
+
+
+
+
+\section{real and complex-valued measurable function}
+\begin{definition}{(real-valued) measurable functions}
+Let $(X,\mathcal{A})$ be a measurable space, 
+对于 $f: X \rightarrow \overline{\mathbb{R}}$ 如果它是 $(\mathcal{A}, \mathcal{B}(\overline{\mathbb{R}}))$-measurable 的, 我们直接简称它是 $\mathcal{A}$-measurable 的, 或者简称为 measurable 的.
+
+\end{definition}
+\begin{remark}
+    实际上, 使用无穷作为值, 就是把\textbf{原本不在定义域上的无穷跳跃点放到了定义域上}, 些情况下, 仅仅是一种方便的记号，但它们通常不会被视为真正的值.
+    
+    但是等价地, 我们为了便利一般都会使用 extended real number system 来进行分析, 把这些无穷间断当作无穷的值来进行分析. 
+    
+    这样做法的合理性是, 对于\textbf{零测集大小多个这样的无穷间断点}, 在 Lebesgue 积分体系下这一行为\textbf{并不会影响函数的 integrability 以及 integral 的值}, 因而我们可以这么做. 这一点之后并不会造成困扰, 因为我们在之后定义可积空间时, 会避开有超过零测集大小多个无穷间断点的函数, 以及无法定义的行为.
+
+    我们容易验证:
+    $$
+    \mathcal{B}(  \overline{\mathbb{R}}) = \{  E \subseteq \overline{\mathbb{R}}  \mid  E\cap \mathbb{R} \in \mathcal{B}(\mathbb{R})   \}
+    $$
+    
+    以及, $   \mathcal{B}(  \overline{\mathbb{R}}) $ 的 generating set 可以是所有的 $(a, \infty]$ 集合或者 $[-\infty, a)$ 集合\textbf{.} 所以\textbf{一个 map to $\overline{\mathbb{R}}$ 的函数是可测的, 当且仅当任意 $ (a, \infty]$ 的 preimage 都可测}.\\
+    \end{remark}
+
+
+\begin{definition}{(complex-valued) measurable functions}
+    如果 $f: X \rightarrow \mathbb{C}$ 满足: $\re f, \im f$ 都是 (real-valued) $X$-measurable 的, 那么也称 $f$ 是 $X$-measurable 的, 或者直接说是 measurable 的.
+\end{definition}
+\begin{remark}
+    任意 complex function $f$ 都可以写为
+$$
+    f = \re f + i \im f
+    $$
+    这个定义其实等价于 $f$ 是 $(\mathcal{M}, \mathcal{B}(\mathbb{C}))$-measurable 的, 因为这个 statment 等价于 $\re f$, $\im f$ 都是 (real-valued) $X$-measuable 的, 这是因为 $$\borel(\mathbb{C}) \equiv \borel(\mathbb{R}^2) = \borel(\mathbb{R}) \otimes \borel(\mathbb{R})$$
+\end{remark}
+
+
+
+
+\begin{definition}{Lebesgue measurable functions, Borel measurable functions}
+Naturally, 如果 $f: \mathbb{R} \rightarrow \mathbb{C}$ 是一个 $\mathfrak{L}$-measurable 的函数, 那么我们称 $f$ 是 \textbf{Lebesgue measurable} 的.
+
+同样地, 如果它是一个 $\mathcal{B}(\mathbb{R})$-measurable 的函数, 称 $f$ 是 \textbf{Borel measurable} 的. 
+\end{definition}
+
+
+\begin{proposition}
+    在任何 $\mathcal{M}$-measurable function $f$ 前 compose 一个 Borel measurable 的 function, 结果仍然是 $\mathcal{M}$-measurable 的, follows from composition preserves measurability.
+\end{proposition}
+\begin{proof}
+    Follows from def.
+\end{proof}
+\begin{example}
+    $f^2$, $-3f$, $\frac{1}{|f|}$ ($f\not= 0$) 都仍然是 $\mathcal{M}$-measuble 的.
+\end{example}
+
+
+
+\section{arithmetic and sequential preservation of measurable functions}
+\begin{proposition}{addition and multiplication 保留 measuability}
+    如果 $f,g$ 是 $\mathcal{M}$-measurable function, 那么 $f+g, fg$ 也是.
+\end{proposition}
+\begin{proof}
+Suffices to assume $f,g$ is (extended) real-valued. Complex case follows trivially.
+
+Suppose $f,g$ 是 $\mathcal{M}$-measurable 的, 我们想要证明: $f+g$ 是 $\mathcal{M}$-measurable 的, suffices to show: $(f+g)^{-1}(a,\infty] \in \mathcal{M}$ for any $a\in \mathbb{R}$.
+
+我们 notice:
+\begin{equation}
+    \{x\in X \mid f(x) + g(x) > a  \} = \bigcup_{r \in \mathbb{Q}} \{  x \mid f(x) > r \} \cap \{  x \mid g(x) > a-r \}
+\end{equation}
+于是 finishes the proof.
+
+对于 $fg$, 我们发现有 
+$$
+fg = \frac{1}{2}((f+g)^2 - f^2 - g^2)
+$$
+于是也 finishes the proof, following 前一个 proposition.
+\end{proof}
+
+\begin{lemma}{sequential behavior of real-valued measurable function}
+如果 $\{ f_n :X\rightarrow   \overline{\mathbb{R}}\}_{n\in\mathbb{N}}$ 是一个 seq of $\mathcal{M}$-measurable functions, 那么
+\begin{itemize}
+    \item $$g_1(x) : = \sup_j f_j(x)$$
+    \item $$g_2(x) : = \inf_j f_j(x)$$
+    \item $$g_3(x) : = \limsup_{j \rightarrow \infty} f_j(x)$$
+    \item $$g_4(x) : = \liminf_{j \rightarrow \infty} f_j(x)$$
+\end{itemize}
+都是 $\mathcal{M}$-measurable 的.
+\end{lemma}
+\begin{proof}
+ \[
+g_1(x) = \sup_{j \in \mathbb{N}} f_j(x).
+\]
+由上确界的定义：
+\[
+g_1(x) > a \iff \exists j \in \mathbb{N}, \text{ such that } f_j(x) > a.
+\]
+因此，
+\[
+\{ x \mid g_1(x) > a \} = \bigcup_{j \in \mathbb{N}} \{ x \mid f_j(x) > a \}.
+\]
+因而:
+$$
+g_1 ^{-1}((a,\infty]) = \bigcup_1^\infty f_j ^{-1} ((a,\infty])
+$$
+
+由于 \( f_j \) 可测，集合 \( \{ x \mid f_j(x) > a \} \) 是 \(\mathcal{M}\)-measurable ，而可测集合的可数并仍然是可测的，因此 \( g_1 \) 可测。
+
+inf: dually.
+
+limsup: 等于 inf of sup ($k\geq n$)
+
+liminf: 等于 sup of inf  ($k\geq n$)
+\end{proof}
+\begin{remark}
+    从这个 proof 里笔者发现了这个惊人的事情。居然有
+  $$
+(sup_{j} f_j) ^{-1}((a,\infty]) = \bigcup_1^\infty f_j ^{-1} ((a,\infty])
+$$
+但是仔细想想也是合理的. 因为 function seq 的 sup 函数能够 map 到的值大的元素肯定比其中任何一个 function $f_n$ 更多. 并且其中存在一个 limit 关系.
+
+以及得出了一个很重要的结论: \textbf{可测函数的 seq 的各种极限仍然是可测函数.}
+\end{remark}
+
+
+\begin{corollary}
+    如果 $\{ f_n :X\rightarrow   \overline{\mathbb{R}}\}_{n\in\mathbb{N}}$ 是一个 seq of $\mathcal{M}$-measurable functions, 且在任意 $x$ 处极限都存在, 那么
+$$
+f(x) := \lim_{j\rightarrow \infty} f_j(x)
+$$
+是 $\mathcal{M}$-measurable 的.
+\end{corollary}
+\begin{proof}
+    directly follows from lemma. 因为 $x$ 处极限如果存在, 那么 $\sup_f f_j (x)  = \inf_j f_j(x) $
+\end{proof}
+
+
+
+
+
+\begin{corollary}
+    $f,g$ $\mathcal{M}$-measurable $\implies$ $\max(f,g), \min(f,g)$$\mathcal{M}$- measurable 
+\end{corollary}
+\begin{proof}
+    two element sequence, 剩余的用空集, 于是 follows form above.
+\end{proof}
+
+
+
+\begin{remark}
+    于是我们知道, 当我们把 $f$ 拆分成 $f^+ := \max(f,0)$, $f^- := \max(-f,0)$, 我们有 
+
+    \begin{center}
+ \textbf{ $f$ $\mathcal{M}$-measurable $\implies$ $f^+, f^-$ $\mathcal{M}$-measurable}
+    \end{center}
+
+并且由于 $f = f^+ - f^-$, 反向也成立. 并且 $|f| = f^+ + f^-$, 因而有:
+\begin{center}
+     \textbf{ $f$ $\mathcal{M}$-measurable $\Longleftrightarrow$ $f^+, f^-$ $\mathcal{M}$-measurable} \textbf{$\Longleftrightarrow$ $|f|$ $\mathcal{M}$-measurable}
+\end{center}
+\end{remark}

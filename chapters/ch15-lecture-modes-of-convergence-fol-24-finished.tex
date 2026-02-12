@@ -1,0 +1,247 @@
+\chapter{modes of convergence [Fol 2.4, finished]}
+\section{convergence family}
+对于 $f_n,f:X \rightarrow \mathbb{C}$, 我们目前有 4 种不同的 convergence.\\
+2 \textbf{general ones}:
+\begin{itemize}
+    \item \textbf{pointwise convergence}: 字面意思. 
+    \item \textbf{uniform convergence} (on a subset): 对于任意 error bound $\epsilon$, 存在同一个序号 $N$ 可以 $\epsilon$-bound 住这个集合里所有的 $x$ 的函数值和 limit 函数值的 error. 
+\end{itemize}
+2 \textbf{in a measure space}:
+\begin{itemize}
+    \item \textbf{a.e. convergence}: ptwise convergence for a.e. $x$, 即 outside a null $E$.
+    \item \textbf{convergence in $L^1$}: $\int |f_n -f| \rightarrow 0$
+\end{itemize}
+
+我们 recall trivial relation: \[
+\text{uni. conv} \implies \text{ptwise. conv} \implies \text{conv. a.e.}
+\]
+但是我们不清楚 $L^1$-convergence 和它们之间的关系.\\
+我们看以下的 examples: 
+
+\subsection{examples showing a.e. ptwise conv 和 $L^1$ conv 不能互推 }
+\begin{example}
+    on $(\mathbb{R}, \mathfrak{L}, m)$, 以下 $(f_n)$:
+    \begin{itemize}
+        \item \textbf{escape to width }$$f_n = \frac{1}{n} \chi_{(0,n)}$$
+        $f_n \rightarrow 0$\textbf{ uniformly 但 $\not\rightarrow 0$ in $L^1$}
+
+        \item \textbf{escape to hat}: $$f_n = \chi_{(n,n+1)}$$
+        $f_n \rightarrow 0$ \textbf{ptwisely} 但并不 uniformly, 并且\textbf{ $\not\rightarrow 0$ in $L^1$}
+
+        \item \textbf{escape to height}: $$f_n = n \chi_{[0,\frac{1}{n})}$$
+        $f_n \rightarrow 0$ \textbf{a.e., 但是并不 ptwisely,} 当然也并不 uniformly, 并且$\not\rightarrow 0$ in $L^1$
+        
+        \item \textbf{typewriter}: 我们把区间$[0,1]$划分成$2^k$个等长子区间, 对于 $1\leq n \leq 2^k$ 令 $f_{k,n}(x)$  交替取 1, 其他取 0. 
+\[
+f_{n,k}(x) = \begin{cases}
+1, & x \in \left[\frac{n-1}{2^k}, \frac{n}{2^k}\right] \\
+0, & \text{otherwise}
+\end{cases}
+\]
+即, for given $k$, \( f_n \) is the indicator function of the \( n \)-th dyadic interval. \[
+   \| f_{n,k} \|_1  = \frac{1}{2^k} \to 0
+   \] 因而 $ f_{n,k} \rightarrow 0$ in $L^1$, 但是 $\forall x\in[0,1]$, $ f_{n,k}(x)\not\rightarrow 0$ ptwisely. (也不 a.e.)
+(这个例子, 在推广至 $L^p$ 空间的时候, 也有 $ \| f_{n,k} \|_p \rightarrow 0$, 也可以说明 \textbf{$L^p$ convergence 并不能推导 a.e. convergence, 除了 $L^\infty$ 的例外}.)
+    \end{itemize}
+\end{example}
+
+在这些例子中, 我们发现, $L^1$-convergence 和 uniform, ptwise, a.e. 这三个 modes of covergence 都互不推导. 对于 uniform convergence 和 ptwise convergence, 这是很合理的, 因为可以函数越来越宽和扁使得积分不变但是却 uni conv; 也可以函数积分收敛但是在一个零测集上反复跳跃.\\
+
+并且我们进一步发现, 就算是 a.e. 收敛, 也和 $L^1$ 收敛没有互推关系. 比如 ex (3), 这个函数只在 $0$ 处不收敛至 0, 但是整体的积分却是 const 1. \\
+我们 recall: 两个函数 a.e. 相等, 等价于它们的 $L^1$ distance 为 0. 但是\textbf{它们作为函数列极限行为, 并不相干}.\\ 
+
+关于 $L^1$-convergence 和 uniform, ptwise, a.e. convergence 的关系我们已经讨论完了. \\
+接下来我们将关于 $L^1$-convergence 这一条线, 引入一些新的 convergence modes, 在更大的 convergence family 中讨论这些 convergence 的关系. 
+
+\section{3 new modes of convergence: fast $L^1$-conv, conv measure and subseq a.e. conv}
+\begin{definition}{fast $L^1$-convergence, convergence in measure, subseq a.e. convergence}
+
+对于  $f_n,f:X \rightarrow \mathbb{C}$, 我们定义以下三种 convergence:
+\begin{itemize}
+    \item \textbf{fast $L^1$-convergence}: if  \[
+    \sum_{n=1}^\infty \int |f_n - f| < \infty    
+    \]
+    \item \textbf{convergence in measure}: if \[
+    \mu(x : |f_n(x) - f(x)| > \epsilon) \overset{n\to \infty}{\longrightarrow} 0
+    \]
+    \item \textbf{subseq a.e. convergence}: if 存在一个 subseq $(f_{n_j})$ 使得 \[
+    f_{n_j} \overset{j\to \infty}{\longrightarrow} f \;\;\; a.e.
+    \]
+\end{itemize}
+\end{definition}
+显然, \textbf{fast $L^1$-convergence $\implies $ $L^1$-convergence;}\\
+我们接下来将说明, \textbf{fast $L^1$-convergence 也 $\implies$ a.e. convergence} (于是它同时作为 a.e. convergence 和 $L^1$-convergence 的上位收敛, 作为这两条线路的上位交汇.)\\
+而我们也将说明:  \textbf{$L^1$-convergence 和 a.e. convergence 都 $\implies$ subseq a.e. convergence, 作为这两条线路的下位交汇.}\\
+以及, $L^1$-convergence $\implies$ convergence in measure.\\\\
+
+\begin{remark}
+    对于 convergence in measure, 还有一个可提及的定义是 \textbf{Cachy in measure}: 对于任意 $\epsilon>0$,  \[
+    \mu(x : |f_n(x) - f_m(x)| > \epsilon) \overset{n,m\to \infty}{\longrightarrow} 0
+    \]
+    我们可以证明 (Folland 2.30)\[\text{Cauchy in measure} \implies \text{convergent in measure}\]
+    但是反向并不成立. examples 中,\textbf{ escape to width, escape to hat 以及 typewritter 是 convergent to $0$ in measure 的, 但不 Cauchy in measure; }\\
+    这里和我们在 metric space 上 distance function 的定义中的 "convergent" 和 "Cauchy" 是不同的, \textbf{在 以 distance 为收敛条件的意义上, convergent 是比 Cauchy 更强的性质.} 
+\end{remark}
+
+以下的标记将在之后几个定理的证明中用到:
+我们现在 define:
+\[B_{n,k} := \{  x\in X  :  | f_n(x) -f(x)| \leq \frac{1}{k}   \}\]
+这个集合表示\textbf{对第 $n$th term, error 控制在 $\frac{1}{k}$ 以内的点.}\\
+从而我们可以用交并的形式来表示 ptwise 收敛点的集合:
+\[
+\{ x \mid f_n(x) \rightarrow f(x)\} = \bigcap_{k=1}^\infty \bigcup_{N=1}^\infty \bigcap_{n \geq N} B_{n,k}
+\]
+Recall Chebyshev:
+\[
+g \in L^1 \implies \mu(\{ |g| \geq c\}) \leq \frac{1}{c} \int |g|
+\]
+
+
+\begin{proposition}{\textbf{fast $L^1$-conv $\implies$ a.e. conv.}}
+\[
+\sum_{j=1}^\infty \int  |f_n-f| < \infty \implies f_n\rightarrow f \;a.e.
+\]
+\end{proposition}
+
+\begin{proof}
+我们取\[
+\{ x \mid f_n(x) \rightarrow f(x) \}= \bigcap_{k=1}^\infty \bigcup_{N=1}^\infty \bigcap_{n \geq N} B_{n,k}\] 的 complement
+\[E := \bigcup_{k=1}^\infty \bigcap_{N=1}^\infty \bigcup_{n \geq N} B_{n,k}^c = \{f_n \not\rightarrow f\}\]\textbf{By Cheb, for each $n,k$ we have:}\[ \mu(B_{n,k}^c)  \leq k \int |f_n-f|\]
+因而由 fast $L^1$-convergence 的条件可得 \[ \forall k \forall N ,\quad  \mu(\bigcup_{n\geq N} B_{n,k}^c) \leq k \sum_{n=N}^\infty \int |f_n-f|  \quad  (\rightarrow 0 \text{ as $N\rightarrow \infty$})\]因而 by ctn from above, \[ \mu (\bigcap_{N=1}^\infty\bigcup_{n\geq N} B_{n,k}^c)  =0\]
+因而
+\[\mu(E) = 0\]
+\end{proof}
+\begin{remark}
+    我们知道, $L^1$-convergence 和 a.e. convergence 互不能推, 因为这一个是逐点的性质, 一个是整体的性质. 但是 $L^1$-convergence 作为一个整体的性质又不够强大 (它允许用函数的纵深来换取宽度, 从而在收敛的情况下保持积分不变.). 然而, fast $L^1$-convergence 则是一个足够强大的整体性质. 因而它可以 imply a.e. convergence. 
+\end{remark}
+
+
+
+
+\begin{corollary}{$L^1$-convergence ($\implies$conv. in measure) $\implies$ subseq a.e. conv. }
+    if $f_n \rightarrow f$ in $L^1$, then there exists subseq $(f_{n_j})_{j\in \mathbb{N}}$ s.t. $f_{n_j} \rightarrow f$ a.e. \\
+    (即 \textbf{$L^1$ convergence implies subseq a.e. convergence})
+\end{corollary}
+\begin{proof}
+    注意: \textbf{对于 $L^1$-convergent 的 seq, 我们可以 pick 出一个 fast $L^1$-convergent 的 subseq.}\\
+    Pick $(n_j)_{j\in\mathbb{N}}$ s.t. 
+    \[
+    \int |f_{n_j} - f| \leq \frac{1}{j^n}
+    \]
+    Then \[
+    \sum_{j=1}^\infty \int |f_{n_j}-f| < \infty
+    \]
+    由刚才的 prop 得, $f_{n_j}\rightarrow f$ a.e.
+\end{proof}
+  \begin{comment}
+\begin{remark}
+这里直接证明了 $L^1$-convergence $\implies$ subseq a.e. conv, 而我们也可以\textbf{在中间加上 conv. in measure }这一过渡.\\
+我们可以通过\[ \mu(B_{n,k}^c)  \leq k \int |f_n-f|\] 的关系, 加上 $L^1$-convergence 对这个积分的控制, 简单得到 \textbf{$L^1$ convergent implies convergent in measure}.\\
+至于 convergent in measure 证明 subseq a.e. conv, 这一部分在 Folland 2.30. \textbf{Convergent in measure implies Cauchy in measure, and Cauchy in measure implies subseq a.e. conv.} (这个证明看起来还挺麻烦的.)
+  
+    我们取一个 subseq $(g_j) := (f_{n_j})$, 其满足 \[
+    \mu( E_j := \{x: |g_j(x)- g_{j+1} (x) | \geq \frac{1}{2^j}\}) \leq \frac{1}{2^j} 
+    \]
+
+\end{remark}
+\end{comment}
+
+
+
+
+\section{a.u. conv.(并非 uni. conv. a.e.) 和 Egoroff's Theorem}
+\begin{definition}
+    我们称 $f_n\rightarrow f$ almost uniformly (a.u.), 如果 $\forall \varepsilon > 0$, 都存在 $E \subseteq A$ s.t. $\mu(E) < \varepsilon$ 并且 $f_n \rightarrow f$ uniformly on $E^C$
+\end{definition}
+\begin{remark}
+    和 a.e. convergence 的定义不同, \textbf{a.u. convergence 并不能保证在一个零测集外都 uniform convergence, 但是它仍然 imply a.e. convergence.}\\
+    也有更强的一种 convergence: \textbf{uniform convergence a.e.}, 表示在一个零测集外都 uniform convergence, 其强度在 uni. conv. 和 a.u. conv. 中间. 但在这里, 对于我们即将介绍的 Egoroff's Theorem 而言不需要这么强的 convergence. \\
+    我们将在 $L^p$ space 的部分讨论 uniform convergence a.e. 这个 convergence mode, 并表示它等价于 $L^\infty$ convergence.
+\end{remark}
+
+
+\begin{theorem}{Egoroff's Theorem}
+\label{Egoroff's Theorem}
+如果 $\mu$ 是个 finite measure ($\mu(X) < \infty$), 那么 
+\[
+f_n \rightarrow f \;\;a.e. \;\; \Longleftrightarrow f_n \rightarrow f \;\; a.u.
+\]
+\end{theorem}
+\begin{proof}
+    a.u. $\implies$ a.e.: DIY (显然)\\
+    a.e. $\implies$ a.u.: Fix $\varepsilon > 0$, 我们有 \[
+    f_n \rightarrow f \;\; a.e. \;\; \Longleftrightarrow \;\; \mu( \bigcup_{k=1}^\infty \bigcap_{N=1}^\infty \bigcup_{n \geq N} B_{n,k}^c)  = 0
+    \]
+    因而 \[
+    \forall k, \;\; \mu( \bigcup_{k=1}^\infty \bigcap_{N=1}^\infty \bigcup_{n \geq N} B_{n,k}^c) =0 
+    \]
+    By Ctn from Above: \[
+    \forall k,\;\;  \lim_{N\rightarrow \infty} \mu(\bigcup_{n\geq N} B_{n,k}) = 0
+    \]
+    Then: \[
+    \forall k,\;\; \exists N_k \;\;s.t. \;\;  \mu(\bigcup_{n\geq N} B_{n,k}) < \frac{\varepsilon}{2^k}
+    \]
+    Set\[
+    E:= \bigcup_{K=1}^\infty \bigcup_{n\geq N_k} B_{n,k}^c
+    \]
+    Then we have: \[
+    \begin{cases}
+        \mu(E) < \sum_{1}^\infty \frac{\varepsilon}{2^k} = \varepsilon \\
+        f_n \rightarrow f \;\;\text{unif. on } E^c = \bigcap_{k=1}^\infty \bigcap_{n\geq N_k} B_{n,k}
+    \end{cases}
+    \]
+\end{proof}
+\begin{remark}
+    在 Prob Theory 中很有用, 因为 prob space 是 finite measure space.
+\end{remark}
+
+\begin{example}
+   $\mu = \infty$ 时的反例: 考虑 escape to hat function $f_n := \chi_{(n,n+1)}$ on $(\mathbb{R}, \mathfrak{L},m)$.\\
+    $f_n \rightarrow 0$ a.e. 但是并不 a.u., 因为 $\mu(X) = \infty$.
+\end{example}
+
+
+
+
+\begin{theorem}{Lusin's Theorem}
+\label{Lusin's Theorem}
+    If $f: [a,b] \rightarrow \mathbb{C}$ 是 Leb. mble 的, 那么 $\forall \varepsilon > 0$, 都存在 compact $K \subseteq [a,b]$ s.t. $m(K^c) < \varepsilon$ 并且 $f|_K$ ctn.
+\end{theorem}
+\begin{proof}
+这里我们 restrict $(\mathbb{R}, \mathfrak{L},m)$ to $[a,b]$, 得到这个 subspace 是一个 finite ($=b-a$) 的 measure space. 
+我们知道 $C_c([a,b]) \subseteq L^1(m)$ 是 dense subset.\\
+First assume $f$ bounded, then $f\in L^1(m)$, $\int|f| < \infty$.\\
+Then: \[\exists (f_n)  \subseteq C_c ([a,b])  \;\;s.t. \;\; f_n\rightarrow f \text{ in } L^1 \]
+Pass to subseq: $(f_{n_j})\rightarrow f$ a.e.\\
+Then by \textbf{Egorov}: \[
+\exists F \subseteq [a,b] \text{ mble } s.t. \;\; \mu(F) < \frac{\varepsilon}{2}
+\]
+并且 $(f_{n_j})\rightarrow f$ uniformly on $F^c$.\\
+By inner regu: 存在 $K \subseteq [a,b] $ cpt s.t. $K \subseteq F^c$ 并且 $m(F^c \setminus K ) < \frac{\varepsilon}{2}$, \textbf{从而 $m(K^c) < \varepsilon$ 并且 $f_n$ conv unif. on $K$, so $f$ ctn on $K$.}
+\end{proof}
+\begin{remark}
+    这个定理的证明中展示了 subseq a.e. convergence 的用处. \\
+    我们可以从一个 $L^1$-convergent 的 seq 中 "蒸馏" 出一个 a.e. convergent 的 subseq, conv to 同一个函数. \\
+    并且如果把空间限制在 measure finite 的 subset 上, 还能获取到一个 a.u. convergent 的 seq.\\ 
+    a.u. convergent 的作用很大, 比如可以保留函数在一个比较大的空间上的 ctn 性质.\\
+    因而 \textbf{subseq convergent 的性质可以 as good as convergent, a.u. 的性质可以 as good as uniform.}
+\end{remark}
+
+
+\section{summary: convergence mode relations}
+\pic[0.85]{assets/ch2-pics-image-20250225185214948.png}
+一条线是函数值方面的收敛, 一条线是测度和积分方面的收敛,  第一次交汇是 fast $L^1$ conv, 汇聚在 subseq a.e. conv. \\
+\textbf{subseq a.e. conv. 是最弱的 convergence, 这里所有的 convergence 都可以推到它.}\\
+这里可能还有其他的 convergence 关系. 但是我们不关心. 因为不太会用到它们的关系.
+\begin{remark}
+    那我们不禁想要问: 如果没有 fast $L^1$ convergence, 但是还是想 show $L^1$ convergence, 怎么办呢? 这个常用的 convergence 难道只能从定义来证明吗?\\
+有以下两个方法:
+\begin{itemize}
+    \item DCT. DCT 就是专门为了证明 $L^1$ convergence 定制的.\\
+    DCT 表明: \[
+  f_n\to f  \; \text{a.e.} + \text{ dominating function } \implies f_n \to f \; \text{in } L^1
+    \]
+    \item 如果作为底的 measure space 是 finite measure 的, 那么 uniform conv. a.e. (which is equiv to $L^\infty$ conv.) 可以推出 $L^1$ convergence. (以及任意的 $L^p$ convergence).
+
+\end{itemize}
+\end{remark}

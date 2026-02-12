@@ -1,0 +1,179 @@
+\chapter{Banach Space and $L_p$ space [Fol 5.1; 6.1]}
+对应  Folland 5.1(1), 6.1(1).
+\section{norm and completeness}
+Recall:
+\begin{definition}{semi-norm, norm}
+  一个\textbf{semi norm} 是一个函数 $||\cdot||: V \to [0,\infty)$ starting from a vector space $V$. 其满足 (1): tri eq 和 (2): homogeneity.\\
+   如果一个 semi-norm 满足 (3): $||v|| = 0$ iff $v = 0$, 则称它为一个 \textbf{norm}.
+\end{definition}
+
+\begin{definition}{Banach space}
+一个 normed vector space $(V, ||\cdot||)$ 的 induced metric space 如果是 complete 的, 它就被称为一个 \textbf{Banach space}.\\
+\end{definition}
+\begin{remark}
+    Cauchy 指的是对于任意 $\epsilon$, 都存在 $N$ 使得对于任意 $n,m \geq N$ 都有 \[
+    \| v_n - v_m\| < \epsilon
+    \]
+而 convergent 指的是存在一个极限 $v$, 使得对于任意 $\epsilon$, 都存在 $N$ 使得对于任意 $n\geq N$ 都有 \[
+\|v_n - v\| \leq \epsilon
+\]
+By tri ineq 容易证明: 在 genral normed VS 中, convergent imply Cauchy, 反之未必. convergent 是更强的条件. (interestingly, convergence in measure 却不 imply Cauchy in measure)
+\end{remark}
+
+\begin{example}
+    $\mathbb{R}^n, \mathbb{C}^n$ with Euclidean norm is a Banach space.\\
+    $C^0([0,1])$: space of ctn functions on $[0,1]$ equipped with $\sup$ norm\textbf{ is Banach}. \[
+    ||f- g|| := \sup_{x\in[0,1]} |f(x) - g(x)|
+    \]
+    $C^0_c(\mathbb{R})$: space of ctn functions with cpt supp on $\mathbb{R}$ equipped with $\sup$ norm\textbf{ is not Banach}! 这是因为, 一个有 cpt supp 的 function seq 的极限未必有 cpt supp. 比如 $(\chi_{[-n,n]})_{n\in \mathbb{N}}$.
+\end{example}
+
+\begin{lemma}
+    A metric space $(X,\rho)$ is \textbf{complete} iff \textbf{every Cauchy seq has a subseq that converges.}
+\end{lemma}
+\begin{proof}
+Trivial. \\
+\(\implies\): Clear. \\
+\(\impliedby\): subseq conv dist bound + Cauchy dist bound can bound the whole tail with arbitrary $\epsilon$.
+\end{proof}这个 statement, 直接把 complete 的定义从每个 Cauchy seq 都收敛, 优化为每个 Cauchy seq 都有一个收敛 subseq. 
+
+\subsection{every Cachy seq conv (complete) $\iff$ every abs conv series convs}
+\begin{definition}{series: convergence 和 absolute convergence}
+对于一个 normed VS $(V,||\cdot||)$ 中的 seq $(v_n)$, 我们称 \(\sum_{n=1}^\infty v_n\) \textbf{converges}, 如果存在 $v\in V$ s.t. \[
+\lim_{N\to\infty} \sum_{n=1}^N v_n  = v
+\]
+即 \[
+\lim_{N\to\infty} \|  v - \sum_{n=1}^N v_n\| = 0
+\]
+我们称 \(\sum_{n=1}^\infty v_n\) \textbf{absolutely converges}, 如果 \[ \sum_{n=1}^\infty ||v_n|| < \infty\]
+即这个 series 对应的 norm series converges to some real number.
+\end{definition}
+
+
+\begin{theorem}{another criterion for Banach space}
+\label{Equiv Condition for space being Banach}
+    A normed VS $(V,||\cdot||)$ is a Banach space iff every absolutely convergent series converges.
+\end{theorem}
+\begin{proof}
+    ``$\implies$": 如果 $(V,||\cdot||)$ is a Banach space,   Suppose $\sum_{n=1}^\infty ||v_n|| < \infty$, 取部分和序列 \[
+    S_N := \sum_{n=1}^N v_n 
+    \]有 \[
+   \|S_m - S_n\| = \Bigl\|\sum_{k=n+1}^m v_k\Bigr\|
+   \le \sum_{k=n+1}^m \|v_k\|\]
+ For  large enough $m,n$ 这个 bound 可以无限小, 因而 $(S_N)$ is Cauchy. 
+    ``$\impliedby$": 如果 $(V,||\cdot||)$ 中 every absolutely convergent series converges.\\
+    Suppose $(v_n)$ is Cauchy. WTS it converges.\\
+By Cauchy, 存在 subseq, say labeled $n_1 < n_2 < \cdots $, s.t. $||v_{m} - v_{n}|| < \frac{1}{3^j} $for all $m,n\geq n_j$
+    Then \[
+    \sum_{j=1}^\infty ||v_{n_{j+1}} - v_{n_j}|| < \infty
+    \]
+    Let $(y_j)$ be s.t. $y_1 = v_{n_1}$, $y_j = v_{n_{j+1}} - v_{n_j}$, then \[
+\sum_{j=1}^\infty \| y_j\| \leq \| y_1 \| + \sum_j {\frac{1}{2^j}}  = \|y_1\| + 1 < \infty
+  \]
+并且有: \[
+    v_{n_j} = \sum_{k=1}^j y_k
+    \]由于 $\sum_{j=1}^\infty \| y_j\| < \infty$, by our assumption 得到, 这个极限 $    \lim_{j\to \infty} v_{n_j}  = \sum_{k=1}^\infty y_k $ 是存在的.
+\end{proof}
+\begin{remark}
+    这个证明中也有一个简略但是有用的结论: 任意 normed VS 中, \textbf{一个 series absolutely convergent 可以推出它的部分和 seq 是 Cauchy 的. (反向则未必成立).}\\
+    整个 imply 关系的示意图:
+\begin{align*}
+    \sum_{k=1}^{\infty} \|x_k\| <\infty   \implies S_N  \text{ Cauchy}& \overset{\text{if Banach}}{\implies}  S_N \text{ converges}  \Longleftrightarrow  \sum_{k=1}^{\infty} x_k\text{ converges} \implies (x_k) \to 0
+        \\    &\overset{\text{always}}{\impliedby}
+    \end{align*}
+(这个图直观说明了为什么 Banach 和 "every abs conv seq conv" 是等价的. 因为这只是\textbf{在 Cauchy imply conv 的前后套了两个必然发生的 implication 关系}而已. 但有时候, 这个关系反而更加好证明.)\\
+\textbf{(注意, partial sum seq Cauchy 并不 imply 原 series absolutely converge!})
+\end{remark}
+
+
+\subsection{任何 finite dim normed VS 一定 Banach, infinite dim 则不一定 Banach }
+
+\begin{remark}
+    Note, 我们知道在 $\mathbb{R}^n$, $\mathbb{C}^n$ 上, abs conv 一定 imply con; 但是在 general (infinite dimension) 的 normed VS 上, \textbf{absolutely converge 并不 imply converge.}\\
+
+1. As is known to all, \(\mathbb{R}^n,\mathbb{C}^n\) 上 Euclidean norm 的 induced metric 就是 Euclidean metric, making it complete metric space, 从而是 Banach space.\\
+2. recall in elementary functional analysis: 
+\begin{definition}
+    我们称两个 norms $\| \cdot\|_a, \| \cdot\|_b$ on a vector space 是 equivalent, 如果存在常数 \(C_1, C_2 > 0\) 使得对于任意 $x$ 都有 \[C_1\|x\|_a \leq \|x\|_b \leq C_2\|x\|_a \]
+这一定义即 topologically equivalent. 因为 equivalent norms define \textbf{equivalent metric, 从而 same topology. }
+\end{definition}
+以及这个经典的定理:
+\begin{theorem}
+finite dimensional vector space $X$ 上, 所有 norms 都 equivalent.
+\end{theorem}
+这里先不证明. \\
+利用这个定理, 我们发现 \textbf{ \(\mathbb{R}^n,\mathbb{C}^n\) 上采用任何 norm 都是 Banach space.}\\
+3. 我们 recall: 任何 finite dim $\mathbb{R}$-vector space 或者 $\mathbb{C}$-vector space 都 isomorphic to some $\mathbb{R}^n$, $\mathbb{C}^n$. 因而
+利用这 theorem, 我们得到: \textbf{任何 finite dim normed VS 都是 complete metric space (Banach space), regardless of choice of norm.}\\
+然而\textbf{ infinite dim normed VS  则未必一定 Banach.}\\
+一个常见的反例: \[
+    V = \mathbb{R}[x]
+  \]
+所有的 polynomials with real coeffs. 考虑这一 norm:  \[
+    \|p\|_{\infty} = \sup_{x \in [0,1]} |p(x)|
+  \]
+\(\mathbb{R}[x]\) 是无限维的, 因为多项式的次数可以任意提高.\\
+$(\mathbb{R}[x], \| p\|_{\sup})$ 不是 complete 的, 其 completion 是 Banach 空间 \(C[0,1]\), 所有在 \([0,1]\) 上的连续函数, with the same \(\sup\) norm.\\
+\end{remark}
+下面我们将介绍一类 infinite dimension 但是 Banach 的 normed VS: $L^p$ spaces.
+
+
+
+
+\section{$L^p$ spaces}
+\begin{definition}{$L_p$ spaces}
+    Consider $p\in(0,\infty)$.\\
+    Let $(X,\mathcal{A},\mu)$ 为一个 measure space.\\
+    Define for $f: X \to \mathbb{R}$ measurable: \[
+    ||f||_p : = \Big(\int |f|^p \; d\mu  \Big)^{\frac{1}{p}} \;\; \in [0,\infty]
+    \]
+    Define \[
+    L^p(\mu) : = \{ f :  ||f||_p  < \infty \} / \sim
+    \] where $f \sim g$ if $f=g$ a.e.
+\end{definition}
+固定一个 measure space $(X,\mathcal{A},\mu)$, 我们将用 $L_p$ 来简易指代 $ L^p(\mu)$.\\
+\begin{remark}
+    注意, 我们容易发现:if $ 0<p< \infty$ and $f$ measurable, TFAE：
+\begin{itemize}
+    \item $f \in L^p$
+    \item $|f| \in L^p$
+    \item $|f|^p \in L^1$
+\end{itemize}
+\end{remark}
+
+\begin{example}
+    $(X,\mathcal{A},\mu) := (\mathbb{R},\mathcal{L}, m)$, \[
+    f(x) : = \frac{1}{x^\alpha} \chi_{(0,1)}, \;\; f\in L^p(m) \Longleftrightarrow   \alpha p < 1
+    \]  \[
+    f(x) : = \frac{1}{x^\alpha} \chi_{(1,\infty)}, \;\; f\in L^p(m) \Longleftrightarrow   \alpha p > 1
+    \]
+    $(X,\mathcal{A},\mu) := (\mathbb{N},\mathcal{P}(\mathbb{N}), \mu_{counting})$, \[
+    L^p( \mu_{counting}) = \{ (a_n)_{n\in\mathbb{N}} : \sum_{n=1}^\infty |a_n|^p < \infty   \}
+    \]
+\end{example}
+
+\begin{lemma}{$L_p$ space is a vector space}
+    $L_p$ space is a $\mathbb{C}$-vector space.
+\end{lemma}
+\begin{proof}
+ Suppose $f, g\in L^p $.\\
+由于 \begin{align}
+        |f+ g|^p   \leq (|f| + |g| )^p \leq (2 \max\{|f|, |g|\})^p  \leq 2^p (|f|^p + |g|^p)
+    \end{align}
+于是 by linearity of integral, 得到:
+$$f, g\in L^p \implies f+g \in L^p$$
+(Note: $p>1$ 时也可以 by $|x|^p$ 这一函数的 convexity 得到这个 bound, 但是这个方法只有效于 $p>1$)
+\end{proof}
+
+但是 \textbf{Question 1: }\textbf{Is $L_p$ a normed VS? 即, $\| \cdot\|_p$ 总是一个 valid norm 吗?}
+A: \textbf{True for $p\in [1,\infty)$, false for $p\in (0,1)$.} 
+Homogeneity 和 $\|f\|_p = 0$ iff $f = 0$ (a.e.) 是显然的, 但是我们发现, tri ineq 没有显然的证明.\\
+Next lecture, we will show the Minkowski's ineq, 即 $L^p$ space 上的三角不等式:
+\[
+||f + g||_p \leq ||f||_p + ||g||_p
+\]
+但是这个不等式只 hold for $p\in [1,\infty)$, 并且 fail otherwise.\\
+(因而对于 $L^p$ space 的研究, 我们将 \textbf{focus on $p \in [1,\infty)$ 的情况.}\\
+
+\textbf{Question 2: Is $L^p$ space, $p\in [1,\infty)$, Banach? Answer: Yes.}\\
+我们也将在 next lecture 证明它.

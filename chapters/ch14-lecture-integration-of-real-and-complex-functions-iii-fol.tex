@@ -1,0 +1,129 @@
+\chapter{integration of real and complex functions-III [Fol 2.3, finished]}
+\section{another dense subspace of $L^1(m_s)$: $C_c (\mathbb{R})$}
+
+上一节课我们知道了: 所有的 simple functions 在 $L^1(\mu)$ 中构成了一个 dense subspace. 尤其是特殊情况: 对于 $(\mathbb{R}, \mathcal{L}, m_s)$, \textbf{所有的 step functions 构成了一个 dense subspace of $L^1(m_s)$. }
+
+今天我们先介绍另一个特殊情况 $(\mathbb{R}, \mathcal{L}, m_s)$ 的 $L^1(m_s)$ 的 \textbf{另一个 dense subspace: 所有的 cpt supported continuous function. }
+
+也就是说, \textbf{任意的 Lebesgue intble function 都可以用 ctn function with compact supp 来近似. } 一个可积函数可以是 supp 非常怪异的以及非常 unctn 的, 但是却可以用 ctn and cpt supp functions 来逼近, in $L^1$ sense. 当然这是一种弱逼近. 函数可以差异很大.
+
+\begin{definition}{$C_c (X)$}
+令 $X$ be a metric space, 我们定义:
+\[
+C_c(X) := \{\text{all ctn functions }f:X \to \mathbb{C}  \text{ with cpt supp}  \}
+\]
+\end{definition}
+
+\begin{theorem}{$C_c(X) \subset L^1(\mu)$ 是一个 dense linear subspace}
+$C_c(\mathbb{R}) \subset L^1(\mu_m)$ 为一个 dense linear subspace.
+\end{theorem}
+\begin{proof}
+对于 $f \in L^1(m_s)$, let $\epsilon > 0$.我们首先 pick 一个 step function 来approximate $f$:   \[
+\phi = \sum_{j=1}^n c_j \chi_{I_j} , \quad  s.t. ||f-\phi||_1 < \frac{\epsilon}{2}
+\]
+空出来的 $\frac{\epsilon}{2}$, 我们使用 ctn and cpt supp function $f_j$对每个 $\chi_{I_j}$ 进行逼近, by:
+ \pic[0.6]{assets/ch2-pics-image-20250219092808932.png}
+从而 $||\sum_j f_j  - \phi|| < \frac{\epsilon}{2}$, 因此 $||\sum_j f_j  - f|| < \frac{\epsilon}{2}$ by tri ineq. 得证.
+\end{proof}
+
+
+
+
+
+
+\section{Riemann v.s. Lebesgue integral}
+我们已经完成了一个任意的 measure space 上的 Lebesgue 积分的定义, 以及可积空间的定义.\\
+Recall: Riemann integral 是对于 $\mathbb{R}^n \rightarrow \mathbb{R}$ 的函数定义的, 经典定义为 $\mathbb{R} \to \mathbb{R}$ 的函数.\\
+现在我们比较对于 $\mathbb{R} \to \mathbb{R}$ 的函数的 Riemann 和 Lebesgue 积分. 我们将会得出结论: \textbf{Riemann 积分是 Lebesgue 积分的特殊情况, 即, Riemann 可积的函数一定也 Lebesgue 可积, 并且积分值相同}. (对于 $\mathbb{R}^n \rightarrow \mathbb{ R}$ 的函数也一样, 之后将展开.)\\
+
+Recall Riemann integral 的定义: \begin{definition}
+    对于 $f: [a,b] \rightarrow \mathbb{R}$ bdd, 一个 \textbf{partition} $\mathcal{P} = \{t_j\}_{j=0}^n$ on $[a,b]$ 满足 \[
+    a = t_0 < t_1 < \cdots < t_n = b
+    \]
+Define: \[
+S_{\mathcal{P}}(f) : = \sum_{j=1}^n \sup _{[t_{j-1}, t_j]}  f(t_j - t_{j-1})
+\]\[
+s_{\mathcal{P}}(f) : = \sum_{j=1}^n \inf _{[t_{j-1}, t_j]}  f(t_j - t_{j-1})
+\]
+Define over all possible partition on $[a,b]$: \textbf{lower integral} and \textbf{upper integral}\[
+\overline{I}(f) : = \inf_\mathcal{P \text{ partition}} S_{\mathcal{P}}(f)
+\]\[
+\underline{I}(f) : = \sup_\mathcal{P \text{ partition}} s_{\mathcal{P}}(f)
+\]
+注意到, 对于任意的 $f$, 总是有 \[
+\underline{I}(f) \leq \overline{I}(f)
+\]
+我们称 $f$ 是 \textbf{Riemann integrable} 的, if \[
+\underline{I}(f) = \overline{I}(f) := I(f)
+\]
+这个 $I(f)$ 称为 $f$ 在 $[a,b]$ 上的 Riemann integral. 
+\end{definition}
+
+
+\subsection{Riemann intble $\implies$ Lebesgue intble  }
+\begin{theorem}{Riemann integral 是 Lebesgue integral 的特殊情况}
+\[  f \text{ Riemann integrable} \implies\begin{cases}
+        f \in L^1([a,b], \mathcal{L}. m) \\
+        I(f) = \int_{[a,b]} f \; dm
+    \end{cases} \]
+\end{theorem}
+\begin{proof}
+    for (a): 对于给定 partition $\mathcal{P}$, 我们 set: \[
+    G_\mathcal{P} : = \sum_j M_j  \chi_{[t_{j-1},t_j]} , \quad     g_\mathcal{P} : = \sum_j m_j  \chi_{[t_{j-1},t_j]} 
+    \]
+    从而有: \[
+    S_\mathcal{P}(f) = \int G_\mathcal{P} \; dm , \quad s_\mathcal{P}(f) = \int g_\mathcal{P} \; dm
+    \]
+    我们知道, refinement 能增加 $s_\mathcal{P}$, 减小 $S_\mathcal{P}$ 从而增加逼近精度, 这一点在 Lebesgue integral 中更加明显: \begin{align}
+ \mathcal{P } \subset \mathcal{P}' &\implies g_\mathcal{P} \leq g_\mathcal{P'} \leq f \leq G_{\mathcal{P}'} \leq  G_\mathcal{P}         \\
+ & \implies s_\mathcal{P} \leq s_{\mathcal{P}'} \leq I(f) \leq S_\mathcal{P'} \leq S_\mathcal{P}
+    \end{align}
+由于$f$ Riem integrable, \textbf{存在一个 seq of partitions $(\mathcal{P}_n)$ 使得 $\mathcal{P_n}\subset \mathcal{P}_{n+1}$, $||\mathcal{P}|| \to 0$ (mesh), 并且} \[
+s_{\mathcal{P_n}}, S_{\mathcal{P_n}} \overset{n \to \infty}{\longrightarrow}  I(f)
+\]
+因而 settiing \[
+g : = \lim_{n\to \infty} g_{\mathcal{P}_n} 
+\] 为一个 increasing limit; \[
+G : = \lim_{n\to \infty} G_{\mathcal{P}_n} 
+\] 为一个 decreasing limit; 由 mble seq 的 limit behvior 得 $g,G \in L^1(m)$ 且 $g \leq f \leq G$
+并且 by DCT: \[
+\int g \; dm = \lim_n \int g_{\mathcal{P}_n} = I(f) 
+\]\[
+\int G \; dm = \lim_n \int G_{\mathcal{P}_n} = I(f) 
+\]
+从而 \[
+g \leq f \leq G , \quad \text{and }  \int (G-g) \; dm = 0
+\]因而 \[ g =G \;\; a.e.  \;\;(\implies = f \;\; a.e.)
+\]
+因而 \[
+I(f)  = \int f  \; dm
+\]
+(由于  $m$ complete, $f$ 是 Lebesgue mble 的.)
+\end{proof}
+\begin{remark}
+    整体 intuitive. 对定义域的切分是对值域的切分的特殊情况. 
+\end{remark}
+
+
+
+\subsection{Lebesgue's criterion for Riemann integrability}
+
+\begin{theorem}{Lebesgue's characterization of Riemann integrability}
+     定义 \[
+    D_f = \{ x \text{ where } f \text{ is not ctn at}   \}
+    \]
+    则有 \[
+    f \text{ Riemann intble } \Longleftrightarrow m(D_f) = 0 \]
+\end{theorem}
+\begin{proof}
+    在 395 中已经证明一次. 这里再回顾一次.\\
+    Backward direction: trivial. \\
+    Forward direction: assume $   f \text{ Riemann intble }$. \\
+    对于 $f:[a,b] \to \mathbb{R}$,  我们 define: \[
+    H(x)  := \lim_{\delta \to 0} \sup_{|y-x| \leq \delta} f(y), \quad h(x) := \lim_{\delta \to 0} \inf_{|y-x| \leq \delta} f(y)
+     \]
+    即 $f$ 在 $x$ 处的上下极限. 从而: \[
+    f \text{ ctn at } x \Longleftrightarrow  \lim_{y \to x} f(y) = f(x)  \Longleftrightarrow H(x) = h(x)
+    \]因而要证明 $m(D_f) = 0$, STS: $H(x) = h(x)$ a.e.\\
+To prove this: 见 395.
+\end{proof}

@@ -1,0 +1,181 @@
+\chapter{Lebesgue-Radon-Nikodym Theorem [Fol 3.2, finished; 3.3, finished]}
+recall Radon-Nikodym Theorem: \[
+\begin{cases}
+    \mu \; \sigma\text{-finite p.m.} \\
+     \nu \; \sigma\text{-finite s.m.} \\
+     \nu \ll \mu
+\end{cases}\implies \begin{cases}
+    \exists !\; \text{extended } \mu\text{-integrable}\; f: X\to \mathbb{R}\\
+    d\nu = f d\mu
+\end{cases}
+\]
+我们称 $f$ 为 Radon-Nikodym Derivative:\[
+\nu(E) = \int_E f \; d\mu
+\]
+
+
+\begin{example}
+Application: conditional expectation.\\
+\[
+(X,\mathcal{A},\mu)  := \bigg([0,1), \mathcal{B}([0,1)), m\bigg)
+\]
+$f:[0,1) \to \mathbb{R}$ Borel measurable.\\
+Define: \[
+B: = \{\varnothing, [0,\frac{1}{2}), [\frac{1}{2},1),X  \}
+\]
+$f$ 并非一定是 $B$-measurable 的. 
+
+\end{example}
+
+
+
+\section{LRNT: 任意 $\sigma$-finite $\nu,\mu$, 可将 $\nu$ 拆解成 $\lambda \bot \mu$ 和 $\rho \ll \mu$}
+\begin{theorem}{Lebesgue-Radon-Nikodym Theorem}
+    如果 $\begin{cases}
+    \mu \; \sigma\text{-finite p.m.} \\
+     \nu \; \sigma\text{-finite s.m.} 
+\end{cases}$ on $(X,\mathcal{A})$, 那么存在唯一的 decomposition \[
+\nu = \lambda + \rho 
+\]where $\lambda, \rho$ 是 $\sigma$-finite 的 signed measure s.t. $\begin{cases}
+    \lambda \bot \mu \\
+    \rho \ll \mu
+\end{cases}$.\\
+(于是, by RNT, 存在 $\mu$-unique 的 extended $\mu$-integrable $f:X\to \mathbb{R}$ s.t. \(d \rho = f \,d\mu\) ).
+\end{theorem}
+
+
+
+
+
+
+
+Sktech of proof of LRN theorem: 
+Assume for simplicity that $\mu,\nu$ 是 finite p.m.\\
+Like last time, look at \[
+\mathcal{F} : =  \{f\in L^+ : \int_E f\, d\mu \leq \nu(E) \;\; \forall E\in\mathcal{A}  \} / \sim
+\]
+Saw: $\mathcal{F} $ 有 max element $f$.\\
+Define $\rho$ by $d \rho = f \, d \mu$.\\
+Set: \[
+\lambda : = \nu - \rho
+\]
+Want: $\lambda \bot \mu$.\\
+Prove by contradiction: 如果 $\lambda \not \bot \mu$, 那么Lemma 2 告诉我们: 存在 $\epsilon > 0$ 和 positive measure 的 $E \in \mathcal{A}$ 使得: \[
+\lambda \geq \epsilon \mu
+\]
+on $E$.\\
+Set \[
+g: = f + \epsilon\chi_E 
+\]
+则 \[
+\int_F g \, d\mu = \int_{F \cap E} (f + \epsilon)\, d\mu \, + \, \int_{F \cap E^c} f \, d\mu
+ \]
+因而 \begin{align*}
+    \rho (F \cap E)  + \epsilon \mu (F \cap E) + \rho (F \cap E^c) &= \rho(F) + \epsilon \mu(F \cap E) \\
+    &\leq \nu(F) - \epsilon \mu(F)  + \epsilon \mu (F\cap E) \\
+    &\leq \nu(F)
+\end{align*} 
+因而 $g \in \mathcal{F}$ 且 $g > f$.\\
+从而得证 $\lambda \bot \mu$. 从而 existence proved.\\
+Uniqueness part: Suppose we have \[
+\nu = \lambda_1 + \rho_1 = \lambda_2 + \rho_2
+\]
+where $\lambda_i \bot \mu$, $\rho_i \ll \mu$.
+那么 \[
+\lambda_1  - \lambda_2 =  \rho_2 - \rho_1
+\]
+我们知道, $\lambda_1  - \lambda_2 $ 和 $ \rho_2 - \rho_1$ 也是 signed measures. 并且, 
+\[
+(\lambda_1  - \lambda_2) \bot \mu ,\quad ( \rho_2 - \rho_1) \ll \mu 
+\]
+By Lemma 1: \[
+\lambda_1  - \lambda_2 =  \rho_2 - \rho_1 = 0
+\]
+
+
+
+
+
+Properties of the RN derivative:
+(P91 in Folland)
+\[
+\frac{d(\nu_1 + \nu_2)}{d \mu} = \frac{d \nu_1}{d\mu} + \frac{d\nu_2}{d \mu}
+\]
+\[
+\nu \ll \mu ,\mu \ll \mu \implies \frac{d\nu}{d\mu} \frac{d\mu}{d\nu}  = 1
+\]
+$\mu$-a.e. = $\nu$-a.e.
+
+
+
+
+
+
+\section{complex measure 以及 complex version of LRNT}
+
+\begin{definition}{complex measure}
+    一个 complex measure on a measurable space $(X,\mathcal{A})$ 是一个 map $\nu: \mathcal{A} \to \mathbb{C}$ satisfying $\nu(\varnothing) = 0$ 以及 ctbl disjoint additivity.
+\end{definition}
+
+
+
+\begin{example}
+    simple complex measures:
+
+$X = \{1,2,\cdots, n \}$
+$\nu$ p/s/c measure on $X$.\\
+
+
+Since \( X = \{1,2,\dots,n\} \), a complex measure \( \nu \) is just a function  
+\[
+\nu_0: X \to \mathbb{C}, \quad \text{i.e., } \nu_0 = (\nu_1, \dots, \nu_n) \in \mathbb{C}^n.
+\]而 \[
+\nu (E) = \sum_{x\in E} \nu_0(x)
+\]
+
+$\nu$ positive: $ \in \mathbb{R}_+^n$
+$\nu$ signed: $ \in \mathbb{R}^n$
+
+
+
+For discrete spaces, the total variation measure is defined pointwise:
+
+\[
+|\nu|(i) := |\nu_i|, \quad \text{for each } i = 1,\dots,n.
+\]
+
+So the total variation measure \( |\nu| \) is just the vector of magnitudes:
+\[
+|\nu| = (|\nu_1|, |\nu_2|, \dots, |\nu_n|).
+\]
+
+What is \( \frac{d\nu}{d|\nu|} \)?
+
+Since this is a finite discrete setting, the Radon-Nikodym derivative is computed **pointwise**:
+\[
+\left( \frac{d\nu}{d|\nu|} \right)(i) = 
+\begin{cases}
+\frac{\nu_i}{|\nu_i|} & \text{if } \nu_i \neq 0, \\
+0 & \text{if } \nu_i = 0.
+\end{cases}
+\]
+
+So the result is a function \( f : X \to \mathbb{C} \), given by:
+
+\[
+f(i) = 
+\begin{cases}
+\frac{\nu_i}{|\nu_i|} & \text{if } \nu_i \neq 0, \\
+0 & \text{if } \nu_i = 0.
+\end{cases}
+\]
+
+\[
+f := \frac{d\nu}{d|\nu|} = \left( \frac{\nu_1}{|\nu_1|}, \frac{\nu_2}{|\nu_2|}, \dots, \frac{\nu_n}{|\nu_n|} \right),
+\quad \text{with the convention } \frac{0}{0} := 0.
+\]
+
+This derivative is a function that lives on the unit circle in \( \mathbb{C} \) (except at zero), and it satisfies:
+\[
+|f(i)| = 1 \quad \text{whenever } \nu_i \neq 0.
+\]\end{example}

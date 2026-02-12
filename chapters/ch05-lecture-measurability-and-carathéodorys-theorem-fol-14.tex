@@ -1,0 +1,106 @@
+\chapter{$\mu^*$-measurability and Carathéodory's Theorem [Fol 1.4]}
+
+
+\section{$\mu^*$-measurable}
+\begin{definition}{$\mu^*$-measurable}
+    Given outer measure $\mu^*$, 我们称 $A \sub X$ 是 $\mu^*$-measurable 的, if:
+    $$
+    \mu^*(E) = \mu^*(E \cap A) + \mu^*(E \cap A^c)
+    $$
+\end{definition}
+\begin{remark}
+countable subadditivity 蕴含的信息是: 如果我们把一个集合 divide 成几部分, \textbf{其 outer measure 有可能 increase.}  而 $\mu^*$-measurable 的含义是: 任何一个其他集合, 分割为和 $E$ 重合以及和 $E$ 的两部分之后, 其 measure 都不会增大.\\
+\noindent \textbf{Note: }\textbf{by subaddivity, must have $\mu^*(E) \leq \mu^*(E\cap A) + \mu^*(E\cap A^c)$}, 而 $\mu^*$-measurable 的集合, 则有 equality 总是成立.\\
+\noindent 同时注意: 这个行为对于 complement 是对称的.
+\end{remark}
+
+\begin{remark}
+ outer measure 是对于整个 power set 中每一个集合都赋予的, 并且其性质 ctbl subadditivity 严格弱于 countable additivity. 
+ 我们自然想到: 是否有一个 power set 的子集, 其不仅是一个 $\sigma$-algebra, 并且其上满足 countable additivity? 如果存在, 那么我们就从 outer measure induce 出了 measure. 
+ \\ \noindent 再加上之前的用随意的 length function 来 induce outer measure 的方法, 我们就可以通过一个随意的 length function $\rar $ outer measre $\rar$ measure. (eg: 从 box length induce 出 Legesgue outer measure, 再 induce 出 Lebesgue measure).\\
+ \noindent 而实际上这个想法是正确的. 只要把 $\mu^*$ 的范围限制在所有 $\mu^*$-measurable sets 上, 就形成了 $\sigma$-algebra, 并且其 restriction 是一个 measure,  甚至是一个 complete measure.
+\end{remark}
+
+\section{Carathéodory's Theorem}
+
+\begin{theorem}
+\label{Carathéodory's Theorem}
+对于任意的 outer measure $\mu^*$, 
+\[
+\mathcal{M} := \{ \text{all } \mu^* \text{-measurable sets}    \}
+\]\textbf{is a $\sigma$-algebra}.\\
+并且, $\mu^* |_\mathcal{M}$ \textbf{is a complete measure.}
+\end{theorem}
+\begin{proof}
+我们首先证明这个 $\mathcal{M}$ 是一个 $\sigma$-algebra
+\begin{enumerate}
+    \item  $\varnothing \in \mathcal{M}$ by def.
+    \item $\mathcal{M}$ closed under complement, by def of $\mu^*$-measurablity. (它对于 complement 是对称的.)
+    \item 为证明 $\mathcal{M}$ closed under countable union, 我们首先 prove it for two sets.
+    假设 $A, B \in \mathcal{M}$, 且 disjoint. 
+    Let $E \sub X$.
+    我们已知 
+    \begin{equation}
+        \mu^*(E) = \mu^*(E \cap A) + \mu^*(E \cap A^c)
+    \end{equation}
+ \textbf{我们 WTS: $\mu^*(E) = \mu^*(E \cap (A\cup B)) + \mu^*(E \cap (A\cup B)^c)$}\\
+\noindent 我们对于 $E \cap A$, $E\cap A^c$ 可以得到: \begin{equation}
+    \mu^*(E \cap A) = \mu^*(E\cap A \cap B) + \mu^*(E \cap A \cap B^c)
+\end{equation}
+\end{enumerate}
+\begin{equation}
+    \mu^*(E \cap A^c) = \mu^*(E \cap A \cap B) + \mu^*(E\cap A^c \cap  B^c)
+\end{equation}
+
+By  $A \cup B = (A \setminus B) \sqcup (A \cap B) \sqcup (B\setminus A)$, 可以得到:
+\begin{equation}
+   \mu^*(E \cap (A\cup B)) \geq \mu^*(E\cap  A \cap  B) + \mu^*(E \cap  A \cap  B^c) + \mu^*(E \cap A^c  \cap B)
+\end{equation}
+结合以上四个 equations 可以得到
+\begin{equation}
+    \mu^*(E) \geq \mu^*(E \cap (A\cup B)) + \mu^*(E \cap (A \cup B^c))
+\end{equation}
+又 $\leq$ by countable subadditivity 成立, 我们得证 closed under two union (从而 inductively closed under any finite union, $\mathcal{M}$ 因而是一个 algebra).\\
+\begin{remark}
+    (Note: 这里我会想: 证明了这个 statement for any union of two sets 不就是证明了它对 any union 都成立吗? 实则不然, 因为 set union 的从属关系并不是可以从对任意 $n$ 成立推广到对无穷成立, 因为这里的无穷是一个真实存在的 sequence, 而我们可以从"任意 $n$ 成立推广到对无穷成立" 的是比较数值大小, 因为 infinite series sum 的定义就是 limit, 而 set union 并没有 limit. 所以这里不能够直接得证.)\\\\
+\end{remark}
+\noindent (Continuing the proof:)
+\noindent 现在我们再把这个 closed under finite union 推广到 closed under countable union, 以映证 $\mathcal{M}$ 是一个 $\sigma$-algebra. 注意到 \textbf{STS (suffices to show): $\mathcal{M}$ closed under countable disjoint union}. 因为任意不 disjoint 的两个集合都可以拆分成三个 disjoint 的集合.\\
+\noindent 我们令 $(A_i)$ 为一个 $\mathcal{M}$ 中的 disjoint sequence, 并定义 $B_n := \bigcup_{i=1}^n A_i$, 我们由上一步的结论知道, $B_n \in \mathcal{M}$ for all $n$.  
+\noindent Define $B := \bigcup_{i=1}^\infty A_i$,  Let $E\sub X$, WTS: $\mu^*(E ) = \mu^*(E \cap B) + \mu^*(E\cap B^c)$.
+\\
+\noindent 考虑 $\mu^*(E \cap B_n ) = \mu^*(E \cap  B_n \cap A_n) + \mu^*(E \cap B_n \cap A_n^c) = \mu^*(E \cap  A_n) + \mu^*(E \cap B_{n-1})$, 因为 inductively 可得到:
+\begin{equation}
+    \mu^*(E \cap  B_n) = \sum_{i=1}^n \mu^*(E \cap A_i)
+\end{equation}
+\noindent 从而：
+\begin{equation}
+    \mu^*(E) = \mu^*(E \cap  B_n) + \mu^*(E \cap  B_n^c) \geq \sum_{i=1}^n \mu^*(E\cap A_i) + \mu^*(E \cap B^c)
+\end{equation}
+\noindent by monotonicity ($\mu^*(E \cap B_n^c) \geq \mu^*(E \cap B^c)$), 这里是一个 infinite sum, 并且 true for every $n$, 因而可以推广到 infinity, 得到 
+\begin{equation}
+    \mu^*(E) \geq \sum_{i=1}^\infty \mu^*(E \cap A_i) + \mu^*(E  \cap B^c) \geq \mu^*(\bigcup_{i=1}^\infty (E \cap A_i)) + \mu^*(E  \cap B^c) = \mu^*(E \cap B) + \mu^*(E \cap B^c) \geq \mu^*(E)
+\end{equation}
+\end{proof}
+\noindent\textbf{This finishes the proof of $\mathcal{M}$ being a $\sigma$-algebra.} 我们同时发现,  $\mu^*|_\mathcal{M}$ 是一个 \textbf{complete measure} on $\mathcal{M}$ 是一个 trivial fact after the proof, 因为 taking $B = E$, 可以得到 
+\begin{equation}
+    \mu^*(B) = \sum_{i=1}^\infty \mu^*(A_i)
+\end{equation}
+\noindent 并且 by monotonicity, 对于任意的 $\mu^*(A) = 0$, 任取 $E \sub X$, 都有
+\begin{equation}
+    \mu^*(E )  \leq \mu^*(E \cap A) + \mu^*(E \cap A^c) = \mu^*(E \cap A^c) \leq \mu^*(E)
+\end{equation}
+因而
+\[
+\mu^*(E )  = \mu^*(E \cap  A) + \mu^*(E\cap A^c)
+\]
+得到 $A \in \mathcal{M}$. 从而得证这是一个 complete measure.\\
+
+\begin{remark}
+    证明 Carathéodory's Theorem 的 punchline 在于: 我们令 $(A_i) \in \mathcal{M}$ be a sequence, $B_n$ be its partial union for $n$ terms, 可以得到$$\mu^*(E \cap B_n ) = \mu^*(E \cap B_n \cap A_n) + \mu^*(E \cap B_n \cap A_n^c) = \mu^*(E \cap A_n) + \mu^*(E \cap B_{n-1})$$, 因为 inductively 可得到:
+\begin{equation}
+    \mu^*(E \cap B_n) = \sum_{i=1}^n \mu^*(E \cap  A_i)
+\end{equation}
+\noindent 这个 statement 对于 $\mathcal{M}$ 是 $\sigma$-algebra 以及 $\mu^*|_{\mathcal{M}}$ 是 measure 的证明都很重要. 我们在 outer measure 的定义中, 只声明了 countable subadditivity, 而我们需要证明的是 countable diskjoint additivity, 也就是需要把不等式变成一个等式. 
+\\\noindent 为此我们看到 $\mu^*$-measurable 的定义 (Carathéodory condition) 中的等号, 并从中找到这个等式关系: \textbf{通过 disjoint set sequence 上 inductively 对于前一项使用 Carathéodory condition, 得到 disjoint additivity.} (笔者的感觉是 Carathéodory condition 的直观看似不明显, 但是如果把一个 disjoint union 自身作为 $E$, 并把自身的某项作为 $A$, 就非常明显, 表示的是 disjoint measure sum 就是 measure of disjoint union.)
+\end{remark}

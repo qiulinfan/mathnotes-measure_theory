@@ -1,0 +1,221 @@
+\chapter{Jordan decomposition [Fol 3.1, finished]}
+
+对于任意的 signed measure $\nu$, 我们已经通过 Hahn-Decomposition 证明了它一定把集合分为一个 positive set $P$ 和一个 negative set $N$, 并且 unique in $\nu$-a.e. sense.\\
+\begin{example}
+Consider mble space $(\mathbb{N},\mathcal{P}(\mathbb{N}))$, 考虑由\[
+\nu (\{n\}) = n - 3
+\]
+和 countable subadditivity 生成的 signed measure. 从而: \[
+P = \{1,2,3 \}, \quad N = \mathbb{N}\setminus P
+\]
+也可以把 $3$ 划分进 $N$, 因为 $\{3 \},\varnothing$ 是这里唯一的 null set.
+\end{example}
+
+
+
+\section{mutually singular s.m.}
+\begin{definition}{mutually singular}
+    我们称两个 signed measure $\nu_1, \nu_2$ on $(X,\mathcal{A})$ 是 mutually singular 的, 如果 $X = E_1 \sqcup E_2$, 其中 $E_i$ 是 $\nu_i$ 的 null set.\\
+    简单而言就是: 这两个 measure 可以把
+    
+    live on disjoint sets, 在对方 live on 的部分总是 null 的. 
+\end{definition}
+\pic[0.24]{assets/ch3-pics-singular.png}
+\begin{remark}
+    Note: Mutually Singular 并不要求对于任意一个集合, 这两个s.m. 至多有一个不为 $0$ (否则考虑全集 $X$); mutually singular 要求的是：\textbf{存在一个分割 of $X$, 使得这两个 s.m. 各在一边是 null 的}, 从而在这两个子集上, $\nu_1 + \nu_2$ 这个 s.m. 就等于 $\nu_1$ 和 $\nu_2$.\\
+    我们知道, (positive) measure 比普通的函数更加复杂, 因为一旦在某个集合上有值, 它在这个集合的所有超集上都有更大的值, 因而不可能 "两个 measure positive 的地方完全不同". 但是 mutually singular 代表的是: \textbf{这两个 measure 出现变化的区域完全不同.}
+\end{remark}
+\begin{example}
+    1. 把所有 measurable set map to $0$ 的 trivial measure 和任意 s.m. 都 mutually singular.\\
+    2. 再比如: \[
+    (X,\mathcal{A}) = (\mathbb{R},\mathcal{B}(\mathbb{R}))
+    \]
+ 我们选择 Lebesgue measure as $\nu_1$, discrete measure as $\nu_2$, Cantor measure as $\nu_3$.    \[
+    \nu_1 : = m,\quad \nu_2 := \sum_{j=1}^\infty c_j \delta_{x_j},\quad \nu_3 : = \mu_{Cantor}
+    \]
+我们发现: 这三个 measure 中的任意两个都是 mutually singular 的.\\
+因为 discrete measure 支持的集合 $\{ x_j\}_1^\infty$ 是 countable 的, $m(\{ x_j\}_1^\infty) = 0$; 而对于 $(\{ x_j\}_1^\infty)^c$, 这个集合是 discrete measure 的 null set, 因为它并不包含指定的 seq 中的任何元素, showing that \[
+ m \bot  \sum_{j=1}^\infty c_j \delta_{x_j}
+\]
+同理, recall Cantor set 的 Lebesgue meausre 为 $0$, 从而可以用 $C$ 和 $\mathbb{R}\setminus C$ 的分割来说明 \[
+\mu_{Cantor} \bot m
+\]
+并且同理, 由于 Cantor measure 没有 atom, 即其中任何一个单点集的 Cantor measure 都是 $0$, 从而仍然可以采用 $\{ x_j\}_1^\infty$ 和 $(\{ x_j\}_1^\infty)^c$ 的分割来说明:  \[
+\mu_{Cantor} \bot  \sum_{j=1}^\infty c_j \delta_{x_j}
+\]
+\end{example}
+
+
+
+
+
+\section{Jordan Decomposition Thm}
+现在, 我们对于 $E \in \mathcal{A}$ set \[
+\nu^+ (E)  : = \nu(E \cap P) \geq 0
+\]
+以及 \[
+\nu^- (E) : = \nu(E \cap N) \geq 0
+\]
+\begin{lemma}
+对于 s.m. $\nu$, 我们通过 Hahn Decomposition 得到 $P \sqcup N = X$.\\
+Now let $$\begin{cases}
+    \nu^+ (E)  : = \nu(E \cap P) \geq 0 \\
+    \nu^- (E) : = \nu(E \cap N) \geq 0
+\end{cases}$$
+Then:
+    \begin{itemize}
+        \item $\nu^+,\nu^-$ 是 $(X,\mathcal{A})$ 上的 positive measure
+        \item $\nu^+,\nu^-$ 中\textbf{至少有一个是 finite measure} (对应了 $\nu$ admit 的是 $\infty$ 还是 $-\infty$)
+        \item \[\nu = \nu^+ - \nu^-\]
+        \item \[ \nu^+ \bot \,\nu^- \]
+    \end{itemize}
+\end{lemma}
+\begin{proof}
+1. 显然, $\nu^+,\nu^-$ 都是 positive 函数, 并且由于 \[
+\bigg(\bigsqcup_{j=1}^\infty E_j \bigg)\cap P  =  \bigsqcup_{j=1}^\infty (E_j \cap P)
+\]
+(同理 for intersecting $N$), 它们满足 countable disjoint additivity, 因而是 $(X,\mathcal{A})$ 上的 \textbf{positive measure}.\\
+2. By signed measure 的定义, $\nu^+$ 和 $\nu^-$ 必须有一个 finite. 因而 otherwise, 如果存在某个集合上这两个 measure 都 infinite measure 则 not well-defined (contracting well-definedness of $\nu$); 如果不存在这样的集合则 $\nu$ admit both $\infty$ and $-\infty$ (contradicting that $\nu$ 只 admit 至多一个无穷).\\\
+
+3. \[\nu = \nu^+ - \nu^-\] 是直接 by Hahn Decomposition 的. 因为任何一个 measurable set $E$ 都可以拆分成 \[
+(E \cap P) \sqcup (E\cap N)
+\]
+4. Directly follows from Hahn Decomposition.
+\end{proof}
+
+\begin{remark}
+    我们可以 compare \[
+    \nu = \nu^+ - \nu^-
+    \] 的分解 for $\nu: \mathcal{A} \to \overline{\mathbb{R}}$ , with \[
+    f = f^+ - f^-
+    \] 的分解 for $f: X \to \overline{\mathbb{R}}$.
+
+我们发现其实它们的形式是相同的, 只不过 measure 作用在集合作为元素上.\\
+
+$f^{\pm}$ is defined by: \[
+f^{\pm } : = \max \{ \pm f , 0\}\geq 0
+\]and characterized by: \[
+\{ f^+ \not = 0\} \cup \{ f^- \not = 0 \} = \varnothing
+ \]
+ 而 $\nu^{\pm}$ is defined by:$$\begin{cases}
+    \nu^+ (E)  : = \nu(E \cap P) \geq 0 \\
+    \nu^- (E) : = \nu(E \cap N) \geq 0
+\end{cases}$$
+and characterized by: \[ \nu^+ \bot \,\nu^- \]
+\end{remark}
+
+
+下面我们证明 Jordan decomposition: 
+\begin{theorem}{Jordan decomposition theorem}
+对于任意 s.m. $\nu$ on  $(X,\mathcal{A})$, 都存在唯一的 positive measure $\nu^+$, $\nu^-$ s.t. 
+    \begin{itemize}
+        \item $\nu^+,\nu^-$ 是 $(X,\mathcal{A})$ 上的 positive measure
+        \item $\nu^+,\nu^-$ 中\textbf{至少有一个是 finite measure} (对应了 $\nu$ admit 的是 $\infty$ 还是 $-\infty$)
+        \item \[\nu = \nu^+ - \nu^-\]
+        \item \[ \nu^+ \bot \,\nu^- \]
+    \end{itemize}
+\end{theorem}
+\begin{proof}
+    Existence 就是前一个 lemma 一模一样. 我们知道, Jordan decomposition 的测度分割来自于 Hahn decomposition 的全集分割.\\
+    STS Uniqueness:\\
+我们令 $    \nu = \nu^+ - \nu^-$ 为通过 Hahn Decomposition 得到的 Jordan decomposition, 其中 $\nu^+\bot \nu^-$ 分别 supported on $P$ 和 $N$.\\
+Suppose \(  \nu  = \mu^+ - \mu^-\) 是另一个 decomposition s.t. $ \mu^+ \bot \,  \mu^-$. 于是存在 $E,F \in \mathcal{A}$ s.t. \[
+E\sqcup F = X,\quad \mu^+(E) = \mu^-(F) = 0
+\]
+我们发现: $X = E \sqcup F$ 是另一个 Hahn Decomposition of $\nu$. 因而 \[
+P \Delta E = N \Delta F  \quad \text{is } \nu\text{-null}
+\]
+从而对于任意 $A\in\mathcal{A}$, \[
+\mu^+(A) = \mu^+(A\cap E) = \nu(A \cap E) = \nu(A \cap P) = \nu^+(A)
+\]
+因而 \[
+\mu^+ = \nu^+
+\]以及同理, $\nu^- = \mu^-$. 得证.
+\end{proof}
+
+
+
+\section{total variation measure}
+\begin{definition}{total variation measure}
+    \[
+    |\nu| : = \nu^+ + \nu^-
+    \]
+\end{definition}
+Totcal variation measure 和原 s.m. 的关系, 可以类比一个函数的绝对值函数和它自身的关系, 因为 \[
+f = f^+ - f^-, \quad |f|  = f^+ + f^-
+\]
+但是这里, 这个 $|\cdot|$ 符号和绝对值的 $|\cdot|$ 符号的意义并不一致:\textbf{ 这个 $|\nu|$ 并不是 $\nu$ 的绝对值函数}. 在 positive, negative, null sets 上,  $|\nu|$ 确实是 $\nu$ 的绝对值函数, 但是\textbf{在内部既有 positive measure 的部分, 又有 negative measure 的部分的集合, 它的 total variation measure 是要比它的原 s.m. 的绝对值更大的. } 因而它才被叫做原 s.m. 的 total variation measure, 表示某个集合内部, 原 s.m. 从正到负的\textbf{最大变差}.
+
+
+\begin{lemma}
+    $ |\nu |$  是 $(X,\mathcal{A})$ 上的 positive measure.\\
+    并且 $|\nu |$ finite iff $\nu^+$ 和 $\nu^-$ 都 finite.\\
+   (Then we define: 我们称 $\nu$ 是 finite 的, if $|\nu|$ finite p.m.)
+\end{lemma}
+\begin{proof}
+    trivial.
+\end{proof}
+
+
+\subsection{integration w.r.t. s.m.}
+\begin{definition}{integration w.r.t. signed measure}
+    对于 signed measure $\nu$, 我们 set: \[
+    L^1(\nu) : = L^1(|\nu|) = L^1(\nu^+)
+ \cap L^1 (\nu^-)    \]
+且对于每个 $f\in L^1 (\nu)$, 我们 set: \[
+\int f \,d\nu : = \int f \,d \nu^+  - \int f \,d \nu^-
+\]
+\end{definition}
+
+
+\begin{proposition}
+  我们知道, 对于任意 p.m. $\mu$ on $(X,\mathcal{A})$ 以及 $f \in L^1 (\mu)$, \[
+    \nu(E) : = \int_E f \, d\mu
+    \]
+    定义了 $(X,\mathcal{A})$ 上的一个 s.m.\\
+    而通过积分定义出来的 s.m., 对于任意一个 $E\in\mathcal{A}$, 有: \[
+    \nu^{\pm} (E)  =  \int_E f^{\pm}\, d\mu
+    \]从而 \[
+    | \nu| (E)  = \int_E |f| \, d\mu
+    \]
+\end{proposition}
+\begin{proof}
+    这是因为我们容易验证, by the procedure of Hahn decomp,  \[
+    x \in P \iff f(x) \geq 0
+    \]
+    因而 \[
+    \nu^+(E)  = \int_{E \cap \{ f\geq 0\}} f\, d\mu = \int_E f^+ \, d\mu
+    \]
+\end{proof}
+We will learn that: 这个 $f$ 正是 $\nu$ w.r.t. $\mu$ 的 Radon-Nikodym derivative, 从而 $f(x)$ 表示在某个元素处, $\nu$ 相对于 $\mu$ 的变化趋势. 而 total variation measure of $\nu$ 正是把所有的元素上的这个变化趋势都取正 (即取总变化量, 不管方向) 得到的.
+
+
+
+
+
+\begin{lemma}{total variation measure 的性质}
+令 $\nu$ be a s.m. on $(X,\mathcal{A})$, $E\in \mathcal{A}$, 则 
+\begin{itemize}
+    \item \[  |\nu(E) | \leq |\nu |(E) \]
+    \item  \[  E \text{ null w.r.t. } \nu \iff  |\nu|(E) = 0 \iff \nu^+(E) = \nu^-(E) = 0\]
+    \item 如果 $\kappa$ 是 $(X,\mathcal{A} )$ 上的另一个 s.m., 则 \[ \kappa \bot \, \nu \iff \kappa \bot \, |\nu| \iff \kappa \bot \, \nu^+ \text{ and } \kappa \bot \, \nu^-   \]
+\end{itemize}      
+\end{lemma}
+\begin{proof}
+    By def 易得.
+\end{proof}
+
+\paragraph*{这两节课的总结}
+\begin{itemize}
+    \item 我们定义了 signed measure;
+    \item 我们发现一个 signed measure 如果不计较 null sets, 一定可以唯一地被分解成一个全 positive set 和一个全 negative set;
+    \item 并且通过这个对 $X$ 的二分, 我们也得到了对原 s.m. $\nu$ 的二分 $\nu = \nu^+ - \nu^-$, 这个分解也是唯一的
+    \item 我们定义了 total varation measure of a s.m., $|\nu| : = \nu^+ + \nu^-$.
+    \item 我们定义了什么样的函数对于一个 s.m. $\nu$ 是可积的: 对于 $\nu^+$, $\nu^-$ 都可积即可. 从而 general 的积分: \begin{align*}
+        \int f \,d\nu &: = \int f \,d \nu^+  - \int f \,d \nu^- \\ 
+        & =  \bigg( \int \Re f \,d \nu^+ +   i  \int \Im f \,d \nu^+\bigg) -  \bigg( \int \Re f \,d \nu^- +   i  \int \Im f \,d \nu^- \bigg)    \\ 
+        & = \bigg( \big(\int  \Re f^+ \,d \nu^+ -\int  \Re f^- \,d \nu^+  \big) + i\big(\int  \Im f^+ \,d \nu^+ -    \int  \Im f^- \,d \nu^+  \big) \bigg) \\ &\quad -
+        \bigg( \big(\int  \Re f^+ \,d \nu^- -    \int  \Re f^- \,d \nu^-  \big) + i\big(\int  \Im f^+ \,d \nu^- -    \int  \Im f^- \,d \nu^-  \big) \bigg)
+    \end{align*}
+这一个式子里包含了八个小积分. 我们目前学到的就是这么多. 如果引入 complex measure 的话, 
+ \end{itemize}
