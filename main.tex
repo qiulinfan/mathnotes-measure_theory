@@ -5,6 +5,10 @@
 \usepackage{amssymb}%
 \usepackage{graphicx}
 \usepackage{xcolor}
+
+% Custom commands
+\newcommand*{\avint}{\mathop{\ooalign{$\int$\cr$-$}}}
+
 % 字体配置:
 % macOS:   fontset=macnew  或 fontset=mac
 % Windows: fontset=windowsnew 或 fontset=windows
@@ -21,53 +25,49 @@
 \mainmatter
 
 % Lecture notes chapters
-\input{chapters/lec02-sigma-algebra-与-measure.tex}
-\input{chapters/lec04-outer-measure-与-completion-of-a-measurable-space.tex}
-\input{chapters/lec07-distribution-function-与-lebesgue-stieltjes-measures.tex}
-% \input{chapters/lec10-simple-function-and-integration-of-nonnegative-functions-fol-21-finished-22.tex}
-% \input{chapters/lec11-properties-of-integration-on-fol-22-finished.tex}
-% \input{chapters/lec12-integration-of-real-and-complex-functions-i-fol-23.tex}
-% \input{chapters/lec13-integration-of-real-and-complex-functions-ii-fol-23.tex}
-% \input{chapters/lec14-integration-of-real-and-complex-functions-iii-fol-23-finished.tex}
-% \input{chapters/lec15-modes-of-convergence-fol-24-finished.tex}
-% \input{chapters/lec16-product-space-and-product-measure-fol-12-finished-25.tex}
-% \input{chapters/lec17-tonellis-thm-fol-25.tex}
-% \input{chapters/lec18-fubinis-theorem-and-lebesgue-integral-in-r.tex}
-% \input{chapters/lec19-lebesgue-measure-in-r.tex}
-% \input{chapters/lec20-change-of-variable-thm-on-r.tex}
-% \input{chapters/lec21-hardy-littlewood-max-function-and-max-theorem-fol-34.tex}
-% \input{chapters/lec22-lebesgue-differentiation-theorem-fol-34.tex}
-% \input{chapters/lec23-banach-space-and-space-fol-51-61.tex}
-% \input{chapters/lec24-inequilities-on-spaces-fol-61.tex}
-% \input{chapters/lec25-space-and-relationship-between-spaces-fol-61-finished.tex}
-% \input{chapters/lec26-signed-measure-fol-31.tex}
-% \input{chapters/lec27-jordan-decomposition-fol-31-finished.tex}
-% \input{chapters/lec28-radon-nikodym-theorem-fol-32.tex}
-% \input{chapters/lec29-lebesgue-radon-nikodym-theorem-fol-32-finished-33-finished.tex}
-% \input{chapters/lec30-the-dual-of-i-fol-62.tex}
-% \input{chapters/lec31-the-dual-of-ii-fol-62.tex}
-% \input{chapters/lec32-the-dual-of-iii-fol-62-finished.tex}
-% \input{chapters/lec33-differentiation-of-regular-borel-measures-on-r.tex}
-% \input{chapters/lec34-functions-of-bounded-variation-fol-35.tex}
-% \input{chapters/lec35-空间-以及其上的-ftc-for-lebesgue-integral-fol-35-finished.tex}
-% \input{chapters/lec36-problem-solving.tex}
-% \input{chapters/lec37-problem-solving-iii.tex}
-% \input{chapters/lec38-extra-topics.tex}
+\input{chapters/01-sigma-algebra-与-measure.tex}
+\input{chapters/hw01-on_sigma-algebra.tex}
+
+\input{chapters/02-outer-measure-与-completion-of-a-measurable-space.tex}
+\input{chapters/hw02-on_Carathéodorys&Hahn-Kolmogrov-thm.tex}
+
+\input{chapters/03-distribution-function-与-lebesgue-stieltjes-measures.tex}
+\input{chapters/hw03-on_Lebesgue-Stieljes-measures.tex}
+
+\input{chapters/04-measurable_functions_and_integration_on_L^+(mu).tex}
+\input{chapters/hw04-on_measurable-functions.tex}
+
+\input{chapters/05-integration_of_real_and_complex_functions.tex}
+\input{chapters/hw05-on_integration.tex}
+
+\input{chapters/06-product_measure&Fubini-Tonelli.tex}
+\input{chapters/hw06-on_product-measure&mode-of-convergence.tex}
+
+\input{chapters/07-Lebesgue_measure_on_R^n.tex}
+\input{chapters/08-Hardy-Littlewood&LDT.tex}
+\input{chapters/hw07-on_differentiaion.tex}
+
+\input{chapters/09-L^P-space_and_inequalities.tex}
+\input{chapters/hw08-on_L^p-spacecs.tex}
+
+\input{chapters/10-signed_measure&Jordan-decomposition.tex}
+\input{chapters/hw09-on_signed-measure.tex}
+
+\input{chapters/11-Radon-Nikodym_theorem.tex}
+\input{chapters/hw10-on_LRN-theorem&complex-measure.tex}
+
+\input{chapters/12-differentiation_on_real_spaces.tex}
+\input{chapters/hw11-on_regular-borel-measure&BV.tex}
+\input{chapters/hw12-on_absolutely-continuous-functions.tex}
+
+
+\input{chapters/13-the_dual_of_L^p-spaces.tex}
 
 % Homework chapters
-% \input{chapters/hw01-hw-0.tex}
-% \input{chapters/hw02-on-algebra-3940.tex}
-% \input{chapters/hw03-on-carathéodorys-and-hahn-holmogrov-thm4040.tex}
-% \input{chapters/hw04-on-lebesgue-stieljes-measures3040.tex}
-% \input{chapters/hw05-on-measurable-functions3640.tex}
-% \input{chapters/hw06-on-integration5050.tex}
-% \input{chapters/hw07-on-product-measure-and-mode-of-convergence-4950.tex}
-% \input{chapters/hw08-on-differentiaion-5050.tex}
-% \input{chapters/hw09-on-spacecs-5050.tex}
-% \input{chapters/hw10-on-signed-measure-5050.tex}
-% \input{chapters/hw11-on-lrn-theorem-and-complex-measure-4040.tex}
-% \input{chapters/hw12-on-regular-borel-measure-and-functions-of-bounded-variation-3640.tex}
-% \input{chapters/hw13-on-absolutely-continuous-functions-4040.tex}
+% \input{chapters/hw00.tex}
+
+
+
 
 \end{document}
 
