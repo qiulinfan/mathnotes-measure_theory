@@ -1,7 +1,3 @@
----
-title: signed measure and Jordan decomposition
----
-
 # signed measure and Jordan decomposition
 
 <iframe src="../10-signed_measure&Jordan-decomposition.pdf" width="100%" height="95vh"></iframe>

@@ -1,7 +1,3 @@
----
-title: Measure Theory Notes
----
-
 # Measure Theory Notes
 
 ## Chapters
