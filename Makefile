@@ -1,4 +1,4 @@
-.PHONY: all main chapters clean
+.PHONY: all main chapters deploy clean
 
 # 默认目标：生成主 PDF 和所有章节 PDF
 all: chapters
@@ -15,6 +15,10 @@ main:
 chapters:
 	@python3 build_chapters.py
 	@$(MAKE) -s clean
+
+# 生成章节 PDF 并部署到 GitHub Pages 分支
+deploy: chapters
+	@mkdocs gh-deploy --force --remote-branch gh-deploy
 
 # 清理生成的文件
 clean:

@@ -1,6 +1,9 @@
 site_name: Measure Theory Notes
 site_description: Advanced Real Analysis - Following Folland's book
 site_author: Your Name
+site_url: https://qiulinfan.github.io/mathnotes-measure_theory/
+use_directory_urls: false
+remote_branch: gh-deploy
 
 # Repository
 repo_name: mathnotes-measure_theory
