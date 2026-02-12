@@ -1,4 +1,4 @@
-# Homework 6: on product measure and mode of convergence (49/50)
+# hw06-on_product-measure&mode-of-convergence
 
 <iframe src="hw06-on_product-measure&mode-of-convergence.pdf" style="width: 100%; height: 95vh; border: 0;"></iframe>
 

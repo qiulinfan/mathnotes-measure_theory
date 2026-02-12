@@ -1,4 +1,4 @@
-# Homework 10: on LRN Theorem and complex measure (40/40)
+# hw10-on_LRN-theorem&complex-measure
 
 <iframe src="hw10-on_LRN-theorem&complex-measure.pdf" style="width: 100%; height: 95vh; border: 0;"></iframe>
 

@@ -1,4 +1,4 @@
-# Homework 11: on regular Borel measure and functions of bounded variation (36/40)
+# hw11-on_regular-borel-measure&BV
 
 <iframe src="hw11-on_regular-borel-measure&BV.pdf" style="width: 100%; height: 95vh; border: 0;"></iframe>
 
