@@ -439,7 +439,7 @@
   \setlength\parindent{2em}
   \newcommand\figref[1]{\textbf{Figure}~\ref{#1}}
   \newcommand\tabref[1]{\textbf{Table}~\ref{#1}}
-  \renewcommand{\chaptername}{Lec}
+  \renewcommand{\chaptername}{Module}
   \renewcommand{\partname}{\color{structurecolor} Part}
   \newcommand{\authorname}{\textbf{Author: }}
   \newcommand{\institutename}{\textbf{Institute: }}
@@ -497,8 +497,8 @@
 
 \ifdefstring{\ELEGANT@lang}{cn}{
   \ifdefstring{\ELEGANT@scheme}{chinese}{
-    \newcommand{\xchaptertitle}{Lec \zhnumber{\arabic{chapter}}} }{
-    \newcommand{\xchaptertitle}{Lec \thechapter{}}} }{
+    \newcommand{\xchaptertitle}{Module \zhnumber{\arabic{chapter}}} }{
+    \newcommand{\xchaptertitle}{Module \thechapter{}}} }{
   \newcommand{\xchaptertitle}{\chaptername~\thechapter~}}
 
 \setcounter{secnumdepth}{5}
